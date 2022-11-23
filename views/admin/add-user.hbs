@@ -1,0 +1,23 @@
+    <section class="login-block">
+        <div class="pcoded-content">
+          <!-- Container-fluid starts -->
+          <div class="container ">
+              <div class="row ">
+                  <div class="col-sm-12 ">
+                <h2 class="text-center mt-5">Add User</h2>
+                <form action="/admin/add-user" method="post">
+                    <label for="">Name</label>
+                    <input type="text" name="name" required class="form-control">
+                    <label for="">Email</label>
+                    <input type="email" name="email" required class="form-control">
+                    <label for="">Password</label>
+                    <input type="password" name="password" required class="form-control">
+                    {{!-- <label for="">Confirm Password</label>
+                    <input type="password" name="" class="form-control"> --}}
+                    <button type="submit" class="btn text-white btn-primary btn-sm mt-4">Add User</button>
+                </form>
+                  </div>
+              </div>
+          </div>
+        </div>
+    </section>

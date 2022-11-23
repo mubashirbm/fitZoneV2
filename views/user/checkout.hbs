@@ -1,0 +1,554 @@
+<body>
+
+    <!-- Start Header Area -->
+    {{!-- --}}
+    <!-- End Header Area -->
+
+    <!-- Start Banner Area -->
+    <section class="banner-area organic-breadcrumb">
+        <div class="container">
+            <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+                <div class="col-first">
+                    <h1>Checkout</h1>
+                    <nav class="d-flex align-items-center">
+                        <a href="index.html">Home<span class="lnr lnr-arrow-right"></span></a>
+                        <a href="single-product.html">Checkout</a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Banner Area -->
+
+    <!--================Checkout Area =================-->
+    <section class="checkout_area section_gap">
+        <div class="container">
+            {{!-- <div class="returning_customer">
+                <div class="check_title">
+                    <h2>Returning Customer? <a href="#">Click here to login</a></h2>
+                </div>
+                <p>If you have shopped with us before, please enter your details in the boxes below. If you are a new
+                    customer, please proceed to the Billing & Shipping section.</p>
+                <form class="row contact_form" action="#" method="post" novalidate="novalidate">
+                    <div class="col-md-6 form-group p_star">
+                        <input type="text" class="form-control" id="name" name="name">
+                        <span class="placeholder" data-placeholder="Username or Email"></span>
+                    </div>
+                    <div class="col-md-6 form-group p_star">
+                        <input type="password" class="form-control" id="password" name="password">
+                        <span class="placeholder" data-placeholder="Password"></span>
+                    </div>
+                    <div class="col-md-12 form-group">
+                        <button type="submit" value="submit" class="primary-btn">login</button>
+                        <div class="creat_account">
+                            <input type="checkbox" id="f-option" name="selector">
+                            <label for="f-option">Remember me</label>
+                        </div>
+                        <a class="lost_pass" href="#">Lost your password?</a>
+                    </div>
+                </form>
+            </div>
+            <div class="cupon_area">
+                <div class="check_title">
+                    <h2>Have a coupon? <a href="#">Click here to enter your code</a></h2>
+                </div>
+                <input type="text" placeholder="Enter coupon code">
+                <a class="tp_btn" href="#">Apply Coupon</a>
+            </div> --}}
+
+
+
+
+
+            <div class="billing_details">
+                <div class="row">
+                    
+                    <div class="col-lg-8">
+                        <h3>Billing Details</h3>
+
+                        <div class="d-flex">
+                        {{#each user.address}}
+                        <div class="card d-flex" style="width: 16rem;">
+                            <div class="card-body">
+                                <h5>{{this.name}} {{this.house_No}} </h5>
+                                <p class="card-title">{{this.area}} {{this.city}}</p>
+                                <p class="card-text"> {{this.city}} {{this.state}} {{this.pinCode}}</p>
+                                <button onclick="showAddress('{{../user._id}}','{{this._addressId}}')">Use This Address</a>
+                            </div>
+                        </div>
+                        {{/each}}
+                    </div>
+                      
+                        <form class="row contact_form mt-5" action="" method="" id="checkout-form">
+                        
+                            <div class="col-md-6 form-group group p_star ">
+                                Enter your Fullname
+                                <input type="text" class="form-control" id="name" name="name" value="{{this.name}}" required>
+                                
+                            </div>
+
+                            
+                            <div class="col-md-6 form-group group p_star ">
+                                Phone number
+                                <input type="number" class="form-control" id="number"  onkeyup="validatePhone()" name="number" value="{{this.phone}}" required>
+                               
+                            </div>
+                            <div class="col-md-6 form-group group p_star">
+                                Email Address
+                                <input type="email" class="form-control" id="email" name="email" value="{{this.email}}" required>
+                               
+                            </div>
+                            <div class="col-md-6 form-group">
+
+                                <input type="text" class="form-control" value="{{user._id}}" id="userId" name="userId"
+                                    hidden>
+
+                            </div>
+                            <div class="col-md-12 form-group p_star">
+                                State
+                                <input type="text" class="form-control" id="state" name="state" onkeyup="validateState" value="{{this.state}}" required>
+                                
+                            </div>
+                            <div class="col-md-12 form-group p_star">
+                                City
+                                <input type="text" class="form-control" id="city" onkeyup="validatCity" name="city" value="{{this.city}}"required>
+                               
+                            </div>
+                            <div class="col-md-12 form-group p_star">
+                                House Nmber,Building Number
+                                <input type="text" class="form-control" id="house" onkeyup="validateBuidling_Name" name="house" value="{{this.house_No}}"required>
+                                
+                            </div>
+                            <div class="col-md-12 form-group p_star">
+                                Road Name, Area
+                                <input type="text" class="form-control" id="area" onkeyup="validateStreet_Name" name="area" value="{{this.area}}"required>
+                               
+                            </div>
+                            
+                            <div class="col-md-12 form-group p_star">
+                                Pin
+                                <input type="number" class="form-control" id="pin" name="pin" value="{{this.pinCode}}"required>
+                                
+                            </div>
+
+                       
+                            {{!-- YOUR ORDER --}}
+
+
+
+                            <div class="col-lg-12">
+                                <div class="order_box">
+
+                                    <h2>Your Order</h2>
+                                    <ul class="list">
+                                        <li><a href="#"><b> Product </b><span><b> Total</b></span></a></li>
+                                    </ul>
+                                    {{#each products}}
+                                    <ul class="list">
+
+
+                                        <li><a href="#">{{product.name}}<span class="middle"> X {{this.quantity}}</span>
+                                                <span class="last">{{this.total}}</span></a></li>
+                                        {{!-- <li><a href="#">{{this.product.name}} <span class="middle">x
+                                                    {{this.quantity}}</span> <span class="last">$720.00</span></a></li>
+                                        <li><a href="#">Fresh Brocoli <span class="middle">x 02</span> <span
+                                                    class="last">$720.00</span></a></li> --}}
+
+                                    </ul>
+                                 {{/each}}
+                                     <div class="">
+                <div class="">
+                    {{!-- <h2>Have a coupon? <a href="#">Click here to enter your code</a></h2> --}}
+                </div>
+                <input type="text" placeholder="Enter coupon code" id="coupon">
+                <a class="tp_btn" onclick="applyCoupon()">Apply Coupon</a>
+            </div>
+                                    <ul class="list list_2">
+                                        <li><a href="#" >Discount <span>%</span> <span id="offer"></span></a></li>
+                                        {{!-- <li><a href="#">Shipping <span>Flat rate: $50.00</span></a></li>  --}}
+                                        <hr>
+                                        <li><a href="#" >Total <span id="total">{{total}}</span></a></li>
+                                    </ul>
+                                    <br>
+                                    <h6>Payment Method</h6>
+                                    <br>
+                                    <div >
+                                        <div class="payment_item">
+                                        <div class="radion_btn">
+                                            <input type="radio" id="f-option5" name="method" value="Cash On Delivery" required>
+                                            <label for="f-option5">Cash On Delivery</label>
+                                            <div class="check" >
+                                        </div>
+                                        {{!-- <p>Please send a check to Store Name, Store Street, Store Town, Store
+                                            State / County,
+                                            Store Postcode.</p> --}}
+                                    </div>
+                                    <div class="payment_item active">
+                                        <div class="radion_btn">
+                                            <input type="radio" id="f-option6" value="Razor Pay" name="method">
+                                            <label for="f-option6">Razor Pay</label>
+                                            <img src="img/product/card.jpg" alt="">
+                                            <div class="check">
+                                        </div>
+                                        {{!-- <p>Pay via PayPal; you can pay with your credit card if you don’t have a
+                                            PayPal
+                                            account.</p> --}}
+                                    </div>
+                                    </div>
+                                    
+                                    <div class="creat_account">
+                                        <input type="checkbox" id="f-option4" name="selector" required>
+                                        <label for="f-option4">I’ve read and accept the </label>
+                                        <a href="#">terms & conditions*</a>
+                                    </div>
+                                    <button class="primary-btn" onclick="return validateForm()">place Order</button>
+
+
+
+
+                                </div>
+                        </form>
+                       
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        </div>
+    </section>
+
+
+    <script>
+
+
+        function showAddress(userId, addId) {
+         
+        $.ajax({
+            url: '/get-edit-address',
+            data: {
+                userId: userId,
+                addressId: addId
+            },
+            method: 'post',
+            success: (response) => {
+                console.log(response)
+                if (response) {
+                    document.getElementById('name').value = response.address.name;
+                    document.getElementById('number').value = response.address.phone;
+                    document.getElementById('house').value = response.address.house_No;
+                    document.getElementById('city').value = response.address.city;
+                    document.getElementById('email').value = response.address.email;
+                    document.getElementById('area').value = response.address.area;
+                    document.getElementById('state').value = response.address.state;
+                    document.getElementById('pin').value = response.address.pinCode;
+
+                } else {
+                    alert("No response")
+                }
+            }
+
+        })
+    }
+
+        $('#checkout-form').submit((e) => {
+
+    let total=document.getElementById('total').innerHTML
+            e.preventDefault()
+            $.ajax({
+                url: '/checkout/'+total,
+                method: 'post',
+                data: $('#checkout-form').serialize(),
+                success: (response) => {
+
+                    if (response.codSuccess) {
+                        location.href = '/conformation'
+                    } if (response.status) {
+
+                        RazerPay(response)
+                    }
+
+
+
+
+                }
+
+            })
+        })
+        function RazerPay(order) {
+
+            var options = {
+                "key": 'rzp_test_9SAVgysPcKxaYF', // Enter the Key ID generated from the Dashboard
+                "amount": order.total, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+                "currency": "INR",
+                "name": "FITZONE",
+                "description": "Transaction",
+                "image": "https://example.com/your_logo",
+                "order_id": order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+                "handler": function (response) {
+                    /* alert(response.razorpay_payment_id);
+                     alert(response.razorpay_order_id);
+                     alert(response.razorpay_signature)*/
+
+                    verifyPayment(response, order)
+                },
+                "prefill": {
+                    "name": "Mubashir",
+                    "email": "mubashirbm@gmail.com",
+                    "contact": "8078193675"
+                },
+                "notes": {
+                    "address": "Razorpay Corporate Office"
+                },
+                "theme": {
+                    "color": "#3399cc"
+                }
+            };
+            var rzp1 = new Razorpay(options);
+            rzp1.open();
+        }
+
+        function verifyPayment(payment, order) {
+            $.ajax({
+                url: ('/verify-payment'),
+                data: {
+                    payment,
+                    order
+                },
+                method: 'post',
+                success: (response) => {
+                    if (response.status) {
+                        location.href = '/conformation'
+                    } else {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Sorry Payment failed',
+                            timer: 1000,
+                            showConfirmButton: false,
+                        })
+                    }
+                }
+            })
+
+        }
+     var nameError = document.getElementById('name-error');
+    var phoneError = document.getElementById('number-error');
+    var buildingError = document.getElementById('house-error');
+    var streetError = document.getElementById('AddrStreetName-error');
+    var cityError = document.getElementById('city-error');
+    var districtError = document.getElementById('AddrDistrict-error');
+    var stateError = document.getElementById('state-error');
+    var pinError = document.getElementById('pin-error');
+    var submitError = document.getElementById('submit-error');
+
+    function validateName() {
+        var name = document.getElementById('name').value;
+
+        if (name.length == 0) {
+            nameError.innerHTML = '**Name is required';
+            return false
+        }
+        if (!name.match(/^[A-Za-z]*\s{1}[A-Za-z]*$/)) {
+            nameError.innerHTML = '**write full name';
+            return false;
+        }
+        if ((name.length <= 2) || (name.length > 25)) {
+            nameError.innerHTML = '**Name length must be between 3 and 25';
+            return false
+        }
+        nameError.innerHTML = '<i class="fa fa-check-circle" aria-hidden="true" style="color:green;"></i>';
+        return true
+    }
+
+    function validatePhone() {
+        var phone = document.getElementById('number').value;
+
+        if (phone.length == 0) {
+            phoneError.innerHTML = '**mobile number is required';
+            return false
+        }
+        if (phone.length != 10) {
+            phoneError.innerHTML = '**mobile number should be 10 digits';
+            return false
+        }
+        if (!phone.match(/^[0-9]{10}$/)) {
+            phoneError.innerHTML = '**Only digits please';
+            return false
+        }
+        phoneError.innerHTML = '<i class="fa fa-check-circle" aria-hidden="true" style="color:green;"></i>';
+        return true
+    }
+
+    function validateBuidling_Name() {
+        var building = document.getElementById('house').value;
+
+        if (building.length == 0) {
+            buildingError.innerHTML = '**Building name is required';
+            return false
+        }
+        if (!building.match(/^[A-Za-z]*$/)) {
+            buildingError.innerHTML = '**Only alphabets';
+            return false;
+        }
+        if ((building.length <= 2) || (building.length > 25)) {
+            buildingError.innerHTML = '**Building name length must be between 3 and 25';
+            return false
+        }
+        buildingError.innerHTML = '<i class="fa fa-check-circle" aria-hidden="true" style="color:green;"></i>';
+        return true
+    }
+
+    function validateStreet_Name() {
+        var street = document.getElementById('AddrStreetName').value;
+
+        if (street.length == 0) {
+            streetError.innerHTML = '**street name is required';
+            return false
+        }
+        if (!street.match(/^[A-Za-z]*$/)) {
+            streetError.innerHTML = '**Only alphabets';
+            return false;
+        }
+        if ((street.length <= 2) || (street.length > 25)) {
+            streetError.innerHTML = '**street name length must be between 3 and 25';
+            return false
+        }
+        streetError.innerHTML = '<i class="fa fa-check-circle" aria-hidden="true" style="color:green;"></i>';
+        return true
+    }
+
+    function validatCity() {
+        var city = document.getElementById('city').value;
+
+        if (city.length == 0) {
+            cityError.innerHTML = '**city name is required';
+            return false
+        }
+        if (!city.match(/^[A-Za-z]*$/)) {
+            cityError.innerHTML = '**Only alphabets';
+            return false;
+        }
+        if ((city.length <= 2) || (city.length > 25)) {
+            cityError.innerHTML = '**city name length must be between 3 and 25';
+            return false
+        }
+        cityError.innerHTML = '<i class="fa fa-check-circle" aria-hidden="true" style="color:green;"></i>';
+        return true
+    }
+
+    function validateDistrict() {
+        var district = document.getElementById('AddrDistrict').value;
+
+        if (district.length == 0) {
+            districtError.innerHTML = '**district name is required';
+            return false
+        }
+        if (!district.match(/^[A-Za-z]*$/)) {
+            districtError.innerHTML = '**Only alphabets';
+            return false;
+        }
+        if ((district.length <= 2) || (district.length > 25)) {
+            districtError.innerHTML = '**district name length must be between 3 and 25';
+            return false
+        }
+        districtError.innerHTML = '<i class="fa fa-check-circle" aria-hidden="true" style="color:green;"></i>';
+        return true
+    }
+
+    function validateState() {
+        var state = document.getElementById('state').value;
+
+        if (state.length == 0) {
+            stateError.innerHTML = '**state name is required';
+            return false
+        }
+        if (!state.match(/^[A-Za-z]*$/)) {
+            stateError.innerHTML = '**Only alphabets';
+            return false;
+        }
+        if ((state.length <= 2) || (state.length > 25)) {
+            stateError.innerHTML = '**state name length must be between 3 and 25';
+            return false
+        }
+        stateError.innerHTML = '<i class="fa fa-check-circle" aria-hidden="true" style="color:green;"></i>';
+        return true
+    }
+
+    function validatePincode() {
+        var pincode = document.getElementById('pin').value;
+
+        if (pincode.length == 0) {
+            pinError.innerHTML = '**pincode is required';
+            return false
+        }
+        if (pincode.length != 6) {
+            pinError.innerHTML = '**pincode  should be 6 digits';
+            return false
+        }
+        if (!pincode.match(/^[0-9]{6}$/)) {
+            pinError.innerHTML = '**Only digits please';
+            return false
+        }
+        pinError.innerHTML = '<i class="fa fa-check-circle" aria-hidden="true" style="color:green;"></i>';
+        return true
+    }
+
+    function applyCoupon() {
+        
+        var userId = document.getElementById('userId').value
+        var coupon = document.getElementById('coupon').value
+        var Total = document.getElementById('total').innerHTML
+        $.ajax({
+            url: '/apply-coupon',
+            data: {
+                couponName: coupon,
+                userId: userId
+            },
+            method: 'post',
+            success: (response) => {
+                if (response.expired) {
+                    alert("Sorry coupon have expired")
+                } else if (response.notAvailable) {
+                    alert("Invalid coupon")
+                } else if (response.used) {
+                    alert("Coupon already used")
+                } else {
+                   if(Total>response.Minimum_Purchase){
+                    console.log(Total,'sub')
+                    
+                        var discount = response.Discount
+                        var percentage=Total*discount/100
+                        var grandTotal = Total - discount
+                        console.log(Total,'grand')
+                        console.log(percentage,'percentage')
+                         document.getElementById('offer').innerHTML = discount 
+
+                   }else{
+                     console.log(Total,'cvsub')
+                       
+                        var grandTotal = Total 
+                        console.log(Total,'grandvv')
+                   }
+                    
+                    //document.getElementById('discount').innerHTML = discount
+                    document.getElementById('total').innerHTML = grandTotal
+                   
+ 
+                    //document.getElementById('offer').value = discount
+                   // document.getElementById('finalprice').value = grandTotal
+                }
+                
+            }
+        })
+
+    }
+    
+    function validateForm() {
+        if (!validateName() || !validatePhone() || !validateBuidling_Name() || !validateStreet_Name() || !validatCity() || !validateDistrict() || !validateState() || !validatePincode()) {
+            submitError.style.display = 'block'
+            submitError.innerHTML = 'Please fill the form';
+            setTimeout(function () { submitError.style.display = 'none' }, 3000)
+            return false;
+        }
+    }
+
+    </script>

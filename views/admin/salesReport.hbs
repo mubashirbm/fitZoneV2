@@ -1,0 +1,62 @@
+<section class="login-block">
+        <div class="pcoded-content">
+          <!-- Container-fluid starts -->
+          <div class="container ">
+              <div class="row ">
+                  <div class="col-sm-12 ">
+        <div class="row mt-4 mb-4 " >
+           <h4 class="">Sales Report</h4>
+        </div>
+
+
+        <table id="orderTable" class="table table-striped table-bordered" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Order Id</th>
+                    <th>Delivery Adress</th>
+                    <th>Payment</th>
+                    <th>Billing Amount</th>
+                    <th>Profit</th>
+                    <th>Billing Date</th>
+                    <th>Order Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each orders}}
+                <tr>
+                    <td>{{this._id}}</td>
+                    <td>
+                        <div class="btn-group">
+                            <button class="btn btn-secondary btn-sm dropdown-toggle" type="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                               {{this.orderDetails.name}}
+                            </button>
+                            <div class="dropdown-menu">
+                                {{this.orderDetails.name}},{{this.orderDetails.city}},{{this.orderDetails.district}}
+                            </div>
+                        </div>
+                    </td>
+                    <td>{{this.paymentMethod}}</td>
+                    <td>{{this.total}}</td>
+                    <td>{{profit}}</td>
+                    <td>{{this.Date}}</td>
+                    <td>{{this.status}}</td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+                  </div>
+              </div>
+          </div>
+        </div>
+</section>
+<script>
+    $(document).ready(function () {
+        $('#orderTable').DataTable({
+            dom: 'Bfrtip',
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ]
+        });
+    });
+</script>

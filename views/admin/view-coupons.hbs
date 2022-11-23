@@ -1,0 +1,46 @@
+<section class="login-block">
+        <div class="pcoded-content">
+          <!-- Container-fluid starts -->
+          <div class="container ">
+              <div class="row ">
+                  <div class="col-sm-12 ">
+        <div class="row mt-4" >
+            <a href="/admin/add-coupon" class="btn btn-success ml-auto">add Coupon</a>
+        </div>
+        <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">no</th>
+      <th scope="col">name</th>
+      <th scope="col">Coupon Code</th>
+      <th scope="col">Minimum Purchase</th>
+    
+      <th scope="col">Expire Date</th>
+      <th scope="col" >Discount </th>
+      
+    </tr>
+  </thead>
+  <tbody>
+    {{#each coupon}}
+    <tr>
+      <th scope="row">{{inc @index}}</th>
+      <td>{{this.name}}</td>
+      <td>{{this.code}}</td>
+      <td>{{this.Minimum_Purchase}}</td>
+      <td>{{this.Expire_Date}}</td>
+      <td>{{this.Discount}}%</td>
+     
+      <td>
+        
+        <a href="/admin/delete-coupon/{{this._id}}" class="btn btn-danger" onclick="return confirm('press OK to delete this item {{this.name}}')">delete</a>
+      </td> 
+        
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
+                  </div>
+              </div>
+          </div>
+        </div>
+</section>

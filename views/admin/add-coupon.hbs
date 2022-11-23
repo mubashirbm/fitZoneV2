@@ -1,0 +1,91 @@
+      <section class="login-block">
+        <div class="pcoded-content">
+          <!-- Container-fluid starts -->
+          <div class="container ">
+              <div class="row ">
+                  <div class="col-sm-12 ">
+                      <!-- Authentication card start -->
+  
+                      <form class="form-horizontal" action="/admin/add-coupon" method="post" enctype="multipart/form-data">
+                        <fieldset>
+                                                           
+                        <!-- Form Name -->
+                        <legend> ADD COUPON</legend>
+                        
+                        <!-- Text input-->
+                        <div class="form-group">
+                          <label class="col-md-4 control-label" for="product_id">Coupon Name</label>  
+                          <div class="col-md-4">
+                          <input id="product_id" name="name" placeholder="Coupon Name" class="form-control input-md" required="" type="text">
+                            
+                          </div>
+                        </div>
+                        
+                        <!-- Text input-->
+                        <div class="form-group">
+                          <label class="col-md-4 control-label" for="product_name">Coupon Code</label>  
+                          <div class="col-md-4">
+                          <input id="product_name" name="code" placeholder="Coupon Code" class="form-control input-md" required="" type="text">
+                            
+                          </div>
+                        </div>
+                        {{!-- price --}}
+                        <div class="form-group">
+                          <label class="col-md-4 control-label" for="product_name">Minimum Purchase</label>  
+                          <div class="col-md-4">
+                          <input id="product_name" name="Minimum_Purchase" placeholder="Minimum Purchase" class="form-control input-md" required="" type="number">
+                            
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="col-md-4 control-label" for="product_name">Expire Date</label>  
+                          <div class="col-md-4">
+                          <input id="product_name" name="Expire_Date" placeholder="Expire Date" class="form-control input-md" required="" type="date">
+                            
+                          </div>
+                        </div>
+                         <div class="form-group">
+                          <label class="col-md-4 control-label" for="product_name">Discount</label>  
+                          <div class="col-md-4">
+                          {{!-- <input name="Discount" class="form-control input-md" > --}}
+                           <input   type="text" pattern="\d*" maxlength=2 id="product_name"  name = "Discount"  placeholder="Discount" required=""  /> 
+                          </div>
+                        </div>
+                         
+                    
+                        
+                        <!-- Select Basic -->
+                                 
+                       
+                        
+                       
+                         
+                        <!-- Button -->
+                        <div class="form-group">
+                          
+                          <div class="col-md-4">
+                            <button id="singlebutton" type="submit" name="singlebutton" class="btn btn-primary">Add</button>
+                          </div>
+                          </div>
+                        
+                        </fieldset>
+                        </form>
+                        
+                          <!-- end of form -->
+                  </div>
+                  <!-- end of col-sm-12 -->
+              </div>
+              <!-- end of row -->
+          </div>
+          </div>
+          <!-- end of container-fluid -->
+      </section>
+     
+
+
+
+
+
+
+  
+

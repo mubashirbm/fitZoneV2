@@ -1,0 +1,109 @@
+<section class="banner-area organic-breadcrumb">
+    <div class="container">
+        {{!-- <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end"> --}}
+            <div class="col-first d-flex flex-wrap align-items-center justify-content-center mt-5">
+
+                <nav class="d-flex align-items-center ">
+                    {{!-- <a href="/home">Home<span class="lnr lnr-arrow-right"></span></a> --}}
+                    {{!-- <a href="#">wishlist</a> --}}
+                </nav>
+            </div>
+            {{!--
+        </div> --}}
+    </div>
+</section>
+<div class="col-first d-flex flex-wrap align-items-center justify-content-center mt-5">
+    <h1>Orders</h1>
+</div>
+<section class="cart_area">
+    <div class="container">
+        <div class="cart_inner">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+
+                            <th scope="col">Date</th>
+                            <th scope="col">Address</th>
+
+                            <th scope="col">PinCode</th>
+                            <th scope="col">Mobile</th>
+                            <th scope="col">Amount</th>
+                            
+                            <th scope="col">Payment_Method</th>
+                            <th scope="col">Status</th>
+                            <th scope="col"></th>
+
+                        </tr>
+                    </thead>
+
+
+                    <tbody>
+                        {{#each orders}}
+                        <tr >
+
+                            <td>
+                                <h5>{{this.Date}}</h5>
+                            
+                             <td>
+                                <h5>{{this.orderDetails.name}},{{this.orderDetails.city}},{{this.orderDetails.district}},{{this.orderDetails.state}}</h5>
+                            </td>
+                            <td>
+                                <h5>{{this.orderDetails.pinCode}}</h5>
+                            </td>
+                            <td>
+                                <h5>{{this.orderDetails.phone}}</h5>
+                            </td>
+                             <td>
+                                <h5>{{this.total}}</h5>
+                            </td>
+                             <td>
+                                <h5>{{this.paymentMethod}}</h5>
+                            </td>
+                            <td>
+                                <h5>{{this.status}}</h5>
+                            </td>
+                            
+                            <td>
+                                
+                                <button class="btn btn-dark"><a href="/viewOrderProducts/{{this._id}}">View Products</a> </button>
+                               
+                             {{#if cancelStatus}}
+                           
+                             <td><button class="btn "><a href="/cancelOrder/{{this._id}}">Cancel Order</a>
+                              {{else }}
+                            
+                                    
+
+                                {{/if }}
+                               
+                                                           
+                            </td>
+
+                        </tr>
+                        {{/each}}
+
+
+                        <tr class="bottom_button">
+                            <td>
+
+                            </td>
+                            <td>
+
+                            </td>
+                            <td>
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+                </table>
+                <a class="gray_btn" href="/shop">BACK TO SHOP</a>
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+    
+</script>

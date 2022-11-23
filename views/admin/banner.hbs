@@ -1,0 +1,140 @@
+<section class="login-block">
+    <div class="pcoded-content">
+        <!-- Container-fluid starts -->
+        <div class="container  ">
+            <div class="row  ">
+                <div class="col-sm-12 ">
+                    <div class="pcoded-content mt-5">
+                        <h4>Add Banner</h4>
+                    </div>
+                    <form class="form-horizontal" action="/admin/add-banner" method="post" enctype="multipart/form-data">
+
+
+                        {{!-- <div class="form-group">
+                            <label for="exampleInputEmail1">name</label>
+                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                                name="name" value="{{products.name}}">
+                        </div> --}}
+                         <div class="form-group">
+                          <label class="col-md-4 control-label" for="product_id">Main Heading</label>  
+                          
+                          <div class="col-md-4">
+                          <input id="product_id" name="main_heading" placeholder="Main Heading" class="form-control input-md" required="" type="text">
+                            
+                          </div>
+                         
+                        </div>   
+                        <div class="form-group">
+                          <label class="col-md-4 control-label" for="product_id">Sub Heading</label>  
+                          
+                          <div class="col-md-4">
+                          <input id="product_id" name="sub_heading" placeholder="Sub Heading" class="form-control input-md" required="" type="text">
+                            
+                          </div>
+                          <div class="form-group mt-3">
+                            {{!-- <label for="exampleFormControlFile1">Example file input</label> --}}
+                            <input type="file" class="form-control-file" id="exampleFormControlFile1" name="image" onchange="viewImage(event)">
+
+                            <img src="/banner-image/{{products._id}}.jpg" alt="" style="width:50px; height: 50px;" id="imageview">
+                        </div>
+                        </div>   
+                        
+
+                        <button type="submit" class="btn btn-primary">Add Banner</button>
+                    </form>
+
+                    {{#if exist}}
+                    {{!-- <label>Categoty Already Exist</label> --}}
+
+                    <div class="alert alert-danger">
+                        <label>{{exist}}</label>
+                    </div>
+                    {{/if}}
+
+                    {{#if success}}
+                    <div class="alert alert-success">
+                        <label>{{success}}</label>
+                    </div>
+                    {{/if}}
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{{!--
+<script>
+    function viewImage(event) {
+        document.getElementById('imageview').src = URL.createObjectURL(event.target.files[0])
+    }
+</script> --}}
+
+
+
+<section class="login-block">
+        <div class="pcoded-content">
+          <!-- Container-fluid starts -->
+          <div class="container ">
+              <div class="row ">
+                  <div class="col-sm-12 ">
+      
+        <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">No</th>
+      <th scope="col">Main Heading</th>
+      <th scope="col">Sub Heading</th>
+      <th scope="col">Image</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each banners}}
+    <tr>
+      <th scope="row">{{inc @index}}</th>
+      <td>{{this.main_heading}}</td>
+      <td>{{this.sub_heading}}</td>
+     
+      {{!-- <td>{{this.price}}</td>
+      <td>{{this.Realprice}}</td> --}}
+      <td><img style="width:50px;height:50px" src="/banner-image/{{this._id}}.jpg" alt=""></td>
+      <td>
+         <a href="/admin/edit-banner/{{this._id}}" class="btn btn-primary"> edit</a>
+        <a href="/admin/delete-banner/{{this._id}}" class="btn btn-danger" onclick="return confirm('press OK to delete this item {{this.name}}')">delete</a>
+      </td> 
+        
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
+                  </div>
+              </div>
+          </div>
+        </div>
+</section>
+<script>
+    function delete (Id){
+        alert()
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire(
+                    'Deleted!',
+                    'Your file has been deleted.',
+                    'success'
+                )
+            }
+        })
+    }
+</script>
+<script>
+    function viewImage(event){
+        document.getElementById('imageview').src=URL.createObjectURL(event.target.files[0])
+    }
+</script>

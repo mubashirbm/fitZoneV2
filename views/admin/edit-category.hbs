@@ -1,0 +1,45 @@
+<section class="login-block">
+        <div class="pcoded-content">
+          <!-- Container-fluid starts -->
+          <div class="container ">
+              <div class="row ">
+                  <div class="col-sm-12 ">
+                    <form action="/admin/edit-product/{{products._id}}" enctype="multipart/form-data" method="post">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">name</label>
+                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="name" value="{{products.name}}">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">category</label>
+                            <input type="text" class="form-control" id="exampleInputPassword1" name="category" value="{{products.category}}">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">description</label>
+                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="description" value="{{products.description}}">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Price</label>
+                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="price" value="{{products.price}}">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">RealPrice</label>
+                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="Realprice" value="{{products.Realprice}}">
+                        </div>
+                        <div class="form-group">
+                            {{!-- <label for="exampleFormControlFile1">Example file input</label> --}}
+                            <input type="file" class="form-control-file" id="exampleFormControlFile1" name="image" onchange="viewImage(event)">
+
+                            <img src="/product-image/{{products._id}}.jpg" alt="" style="width:50px; height: 50px;" id="imageview">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                  </div>
+              </div>
+          </div>
+        </div>
+</section>
+<script>
+    function viewImage(event){
+        document.getElementById('imageview').src=URL.createObjectURL(event.target.files[0])
+    }
+</script>

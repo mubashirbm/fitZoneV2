@@ -1,0 +1,49 @@
+<section class="login-block">
+        <div class="pcoded-content">
+          <!-- Container-fluid starts -->
+          <div class="container ">
+              <div class="row ">
+                  <div class="col-sm-12 ">
+                    <div class="pcoded-content mt-5 mb-5">
+                      <div class="row mt-4" >
+                        <h3 >User Management</h3>
+                      </div>
+                    </div>
+                      <table class="table table-bordered">
+                        <thead>
+                          <tr>
+                            <th scope="col">No</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Email</th> 
+                            <th scope="col">Status</th>   
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {{#each users}}
+                          <tr>
+                            <th scope="row">{{inc @index}}</th>
+                            <td>{{this.Name}}</td>
+                            <td>{{this.Email}}</td>
+
+                            <td>
+                              {{#if blocked}}
+                              {{!-- <div class="d-none d-print-block"> --}}
+                              <a href="/admin/unblock-user/{{this._id}}"  class="btn btn-success"> Unblock </a>
+                              {{!-- </div> --}}
+                              {{else}}
+                              {{!-- <a href="/admin/delete-user/{{this._id}}" class="btn btn-danger" onclick="return confirm('press OK to delete this item {{this._id}}')">Unblock</a> --}}
+                              {{!-- <div class="d-none d-print-block"> --}}
+                              <a href="/admin/block-user/{{this._id}}" class="btn btn-danger" onclick="return confirm('press OK to Block  {{this.Name}}')">Block</a>
+                            {{!-- </div> --}}
+                            {{/if}}
+                            </td> 
+                              
+                          </tr>
+                          {{/each}}
+                        </tbody>
+                      </table>
+                  </div>
+              </div>
+          </div>
+        </div>
+</section>

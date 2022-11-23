@@ -1,0 +1,77 @@
+<section class="banner-area organic-breadcrumb">
+    <div class="container">
+        <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+            <div class="col-first">
+                <h1>Wishlist</h1>
+                <nav class="d-flex align-items-center">
+                    <a href="/home">Home<span class="lnr lnr-arrow-right"></span></a>
+                    <a href="#">wishlist</a>
+                </nav>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Banner Area -->
+
+<!--================Cart Area =================-->
+<section class="cart_area">
+    <div class="container">
+        <div class="cart_inner">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+
+                            <th scope="col">Product</th>
+                            <th scope="col">Name</th>
+                            <th></th>
+                            <th scope="col">Price</th>
+
+                        </tr>
+                    </thead>
+
+                    {{#each products}}
+                    <tbody>
+
+                        <tr >
+
+                            <td>
+                                <img src="/product-image/{{this.product._id}}.jpg" alt="" width="100px">
+                            </td>
+                            <td>
+                                {{#if empty}}
+                                <h1>wishlist is empty</h1>
+                                {{/if}}
+                                <h5>{{this.product.name}}</h5>
+                            </td>
+                            <td></td>
+                            <td>
+                                <h5>{{this.product.price}}</h5>
+                            </td>
+                           
+
+                        </tr>
+                        {{/each}}
+
+
+                        <tr class="bottom_button">
+                            <td>
+
+                            </td>
+                            <td>
+
+                            </td>
+                            <td>
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+                </table>
+                <a class="gray_btn" href="/shop">BACK TO SHOP</a>
+            </div>
+        </div>
+    </div>
+</section>
+

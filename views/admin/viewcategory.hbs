@@ -1,0 +1,125 @@
+
+<section class="login-block">
+        <div class="pcoded-content">
+          <!-- Container-fluid starts -->
+          <div class="container  ">
+              <div class="row  ">
+                  <div class="col-sm-12 ">
+                    <div class="pcoded-content mt-5"><h4>Add Category</h4></div>
+                     <form class="form-horizontal" action="/admin/add-category" method="post">
+
+                     
+                        {{!-- <div class="form-group">
+                            <label for="exampleInputEmail1">name</label>
+                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="name" value="{{products.name}}">
+                        </div> --}}
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">category</label>
+                            <input type="text" class="form-control" id="exampleInputPassword1" required="" name="category" value="{{category.category}}">
+                        </div>
+                        {{!-- <div class="form-group">
+                            <label for="exampleInputEmail1">description</label>
+                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="description" value="{{products.description}}">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Price</label>
+                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="price" value="{{products.price}}">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">RealPrice</label>
+                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="Realprice" value="{{products.Realprice}}">
+                        </div> --}}
+                        
+                        <button type="submit" class="btn btn-primary">Add Category</button>
+                    </form>
+                    
+                    {{#if exist}}
+                    {{!-- <label>Categoty Already Exist</label> --}}
+
+                    <div class="alert alert-danger">
+                          <label>{{exist}}</label>
+                    </div>
+                    {{/if}}
+                        
+                    {{#if success}}
+                    <div class="alert alert-success">
+                          <label>{{success}}</label>
+                    </div>
+                    {{/if}}
+                    
+                  </div>
+              </div>
+          </div>
+        </div>
+</section>
+{{!-- <script>
+    function viewImage(event){
+        document.getElementById('imageview').src=URL.createObjectURL(event.target.files[0])
+    }
+</script> --}}
+
+
+
+<section class="login-block">
+        <div class="pcoded-content">
+          <!-- Container-fluid starts -->
+          <div class="container pcoded-content ">
+              <div class="row ">
+                  <div class="col-sm-12 col-lg-6 ">
+                    <div class="pcoded-content mt-5 mb-5">
+                      <div class="row mt-4" >
+                        <h3 >Category Management</h3>
+                      </div>
+                    </div>
+                      <table class="table table-bordered">
+                        <thead>
+                          <tr>
+                            <th scope="col">No</th>
+                            <th scope="col">Category</th>
+                            
+                            <th scope="col">Manage</th>   
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {{#each category}}
+                          <tr>
+                            <th scope="row">{{inc @index}}</th>
+                            <td>{{this.category}}</td>
+                            
+
+                            <td >
+         <a href="/admin/category-product/{{this.category}}" class="btn btn-primary ml-5" >View Products</a>
+        <a href="/admin/delete-category/{{this._id}}" class="btn btn-danger" onclick="delete('{{this.name}}')">delete</a>
+      </td> 
+                              
+                          </tr>
+                          {{/each}}
+                        </tbody>
+                      </table>
+                  </div>
+              </div>
+          </div>
+        </div>
+</section>
+<script>
+  function delete(Id){
+    alert()
+    Swal.fire({
+  title: 'Are you sure?',
+  text: "You won't be able to revert this!",
+  icon: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'Yes, delete it!'
+}).then((result) => {
+  if (result.isConfirmed) {
+    Swal.fire(
+      'Deleted!',
+      'Your file has been deleted.',
+      'success'
+    )
+  }
+})
+  }
+</script>

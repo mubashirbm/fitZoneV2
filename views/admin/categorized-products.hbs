@@ -1,0 +1,56 @@
+
+
+<section class="mt-5">
+   
+<section class="login-block mt-5">
+    
+        <div class="pcoded-content  ">
+           
+          <!-- Container-fluid starts -->
+          <div class="container ">
+            
+                
+            <div class="mt-5"> 
+                <h3 > Categorized Products</h3>
+            </div>
+              <div class="row ">
+                
+                  <div class="col-sm-12 ">
+                <table class="table mt-5 table-bordered" >
+                    
+                    <thead class="text-uppercase "> 
+                        <tr>
+                        <th scope="col">no</th>
+                        <th scope="col">name</th>
+                        <th scope="col">category</th>
+                        <th scope="col">description</th>
+                        <th scope="col">price</th>
+                        <th scope="col">Real Price</th>
+                        <th scope="col">Image</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each products}}
+                        <tr>
+                        <th scope="row">{{inc @index}}</th>
+                        <td>{{this.name}}</td>
+                        <td>{{this.category}}</td>
+                        <td>{{this.description}}</td>
+                        <td>{{this.price}}</td>
+                        <td>{{this.Realprice}}</td>
+                        <td><img style="width:50px;height:50px" src="/product-image/{{this._id}}.jpg" alt=""></td>
+                        {{!-- <td>
+                            <a href="/admin/edit-product/{{this._id}}" class="btn btn-primary"> edit</a>
+                            <a href="/admin/delete-product/{{this._id}}" class="btn btn-danger" onclick="return confirm('press OK to delete this item {{this.name}}')">delete</a>
+                        </td>  --}}
+                            
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                    </table>
+                  </div>
+              </div>
+          </div>
+        </div>
+</section>
+</section>

@@ -1,0 +1,111 @@
+<section class="checkout_area section_gap">
+        <div class="container">
+            {{!-- <div class="returning_customer">
+                <div class="check_title">
+                    <h2>Returning Customer? <a href="#">Click here to login</a></h2>
+                </div>
+                <p>If you have shopped with us before, please enter your details in the boxes below. If you are a new
+                    customer, please proceed to the Billing & Shipping section.</p>
+                <form class="row contact_form" action="#" method="post" novalidate="novalidate">
+                    <div class="col-md-6 form-group p_star">
+                        <input type="text" class="form-control" id="name" name="name">
+                        <span class="placeholder" data-placeholder="Username or Email"></span>
+                    </div>
+                    <div class="col-md-6 form-group p_star">
+                        <input type="password" class="form-control" id="password" name="password">
+                        <span class="placeholder" data-placeholder="Password"></span>
+                    </div>
+                    <div class="col-md-12 form-group">
+                        <button type="submit" value="submit" class="primary-btn">login</button>
+                        <div class="creat_account">
+                            <input type="checkbox" id="f-option" name="selector">
+                            <label for="f-option">Remember me</label>
+                        </div>
+                        <a class="lost_pass" href="#">Lost your password?</a>
+                    </div>
+                </form>
+            </div>
+            <div class="cupon_area">
+                <div class="check_title">
+                    <h2>Have a coupon? <a href="#">Click here to enter your code</a></h2>
+                </div>
+                <input type="text" placeholder="Enter coupon code">
+                <a class="tp_btn" href="#">Apply Coupon</a>
+            </div> --}}
+
+
+
+
+
+            <div class="billing_details">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <h3>Billing Details</h3>
+                        <form class="row contact_form" action="/addAddress" method="post" id="checkout-form">
+
+                            <div class="col-md-6 form-group group p_star ">
+                                Enter your Fullname
+                                <input type="text" class="form-control" id="first" name="name" >
+                                <span class="placeholder"></span>
+                            </div>
+                           
+                            {{!-- <div class="col-md-12 form-group">
+                                Company name
+                                <input type="text" class="form-control" id="company" name="company">
+
+                            </div> --}}
+                            <div class="col-md-6 form-group group p_star ">
+                                Phone number
+                                <input type="number" class="form-control" id="number" name="number" >
+                                <span class="placeholder"></span>
+                            </div>
+                            <div class="col-md-6 form-group group p_star">
+                                Email Address
+                                <input type="email" class="form-control" id="email" name="email" >
+                                <span class="placeholder"></span>
+                            </div>
+                            <div class="col-md-6 form-group">
+
+                                <input type="text" class="form-control" value="{{user._id}}" id="email" name="userId"
+                                    hidden>
+
+                            </div>
+                            <div class="col-md-12 form-group p_star">
+                                State
+                                <input type="text" class="form-control" id="state"  name="state">
+                                <span class="placeholder"></span>
+                            </div>
+                            <div class="col-md-12 form-group p_star">
+                                City
+                                <input type="text" class="form-control" id="city"  name="city">
+                                <span class="placeholder"></span>
+                            </div>
+                            <div class="col-md-12 form-group p_star">
+                                House Nmber,Building Number
+                                <input type="text" class="form-control" id="house"  name="house">
+                                <span class="placeholder"></span>
+                            </div>
+                            <div class="col-md-12 form-group p_star">
+                                Road Name, Area
+                                <input type="text" class="form-control" id="area" name="area">
+                                <span class="placeholder"></span>
+                            </div>
+                           
+                             <div class="col-md-12 form-group p_star">
+                                Pin
+                                <input type="number" class="form-control" id="area"  name="pin">
+                                <span class="placeholder"></span>
+                            </div>
+                           
+                           
+
+<button type="submit" >ADD</button>
+                            
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        </div>
+    </section>

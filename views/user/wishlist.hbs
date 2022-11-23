@@ -1,0 +1,139 @@
+<!-- Start Banner Area -->
+<section class="banner-area organic-breadcrumb">
+    <div class="container">
+        <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+            <div class="col-first">
+                <h1>Wishlist</h1>
+                <nav class="d-flex align-items-center">
+                    <a href="/home">Home<span class="lnr lnr-arrow-right"></span></a>
+                    <a href="#">wishlist</a>
+                </nav>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Banner Area -->
+
+<!--================Cart Area =================-->
+<section class="cart_area">
+    <div class="container">
+        <div class="cart_inner">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+
+                            <th scope="col">Product</th>
+                            <th scope="col">Name</th>
+                            <th></th>
+                            <th scope="col">Price</th>
+
+                        </tr>
+                    </thead>
+                    
+                    {{#each products}}
+                    
+                    <tbody>
+
+                        <tr id="{{this._id}}">
+                            
+
+                            <td>
+                                <img src="/product-image/{{this._id}}.jpg" alt="" width="100px">
+                            </td>
+                            <td>
+                               
+                                <h5>{{this.name}}</h5>
+                            </td>
+                            <td></td>
+                            <td>
+                                <h5>{{this.price}}</h5>
+                            </td>
+                            <td>
+                                <button class="btn btn-dark" onclick="addToCart('{{this._id}}')">Add to Cart</button>
+                                <button class="btn btn-danger" onclick="removeWish('{{this._id}}')">Remove</button>
+                            </td>
+
+                        </tr>
+                        {{/each}}
+
+
+                                 {{#if empty}}
+                                <h1>Your Cart is empty</h1>
+                                {{/if}}
+                        <tr class="bottom_button">
+                            <td>
+
+                            </td>
+                            <td>
+
+                            </td>
+                            <td>
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+                </table>
+                <a class="gray_btn" href="/shop">BACK TO SHOP</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<script>
+    function removeWish(wishId) {
+        $.ajax({
+            url: '/remove-wishlist/' + wishId,
+            method: 'delete',
+            success: (response) => {
+                if (response.status) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Your Item has been Removed',
+                        showConfirmButton: true,
+                    })
+                    setTimeout(() => {
+                        document.getElementById(`${wishId}`).remove()
+                      
+                    }, 1200)
+                }
+            }
+        })
+    }
+</script>
+
+<script>
+    function addToCart(cartId) {
+
+        $.ajax({
+            url: '/add-cart/' + cartId,
+            method: 'get',
+            success: (response) => {
+                if (response.exist) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Already Added To Cart',
+                        showConfirmButton: true,
+                    })
+                }
+                else {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Added To Cart',
+                        showConfirmButton: true,
+                    })
+                }
+
+                setTimeout(() => {
+                location.reload()
+                }, 1200)
+            }
+        })
+    }
+
+
+
+</script>

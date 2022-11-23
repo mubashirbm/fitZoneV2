@@ -1,0 +1,101 @@
+      <section class="login-block">
+        <div class="pcoded-content">
+          <!-- Container-fluid starts -->
+          <div class="container ">
+              <div class="row ">
+                  <div class="col-sm-12 ">
+                      <!-- Authentication card start -->
+  
+                      <form class="form-horizontal" action="/admin/add-product" method="post" enctype="multipart/form-data">
+                        <fieldset>
+                                                           
+                        <!-- Form Name -->
+                        <legend> ADD PRODUCTS</legend>
+                        
+                        <!-- Text input-->
+                        <div class="form-group">
+                          <label class="col-md-4 control-label" for="product_id">Product Name</label>  
+                          <div class="col-md-4">
+                          <input id="product_id" name="name" placeholder="Product Name" class="form-control input-md" required="" type="text">
+                            
+                          </div>
+                        </div>
+                        
+                        <!-- Text input-->
+                        <div class="form-group">
+                          <label class="col-md-4 control-label" for="product_name">Product Description</label>  
+                          <div class="col-md-4">
+                          <input id="product_name" name="description" placeholder="Product Description" class="form-control input-md" required="" type="text">
+                            
+                          </div>
+                        </div>
+                        {{!-- price --}}
+                        <div class="form-group">
+                          <label class="col-md-4 control-label" for="product_name">Product Price</label>  
+                          <div class="col-md-4">
+                          <input id="product_name" name="price" placeholder="Product Price" class="form-control input-md" required="" type="text">
+                            
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="col-md-4 control-label" for="product_name">Non offer Price</label>  
+                          <div class="col-md-4">
+                          <input id="product_name" name="Realprice" placeholder="Product Price " class="form-control input-md" required="" type="text">
+                            
+                          </div>
+                        </div>
+                        
+                        
+                        <!-- Select Basic -->
+                        <div class="form-group col-md-4">
+                         <label for="inputState">Category</label>
+                         <select id="inputState" name="category" class="form-control">
+                          {{#each category}}
+                          
+                          <option>{{this.category}}</option>
+                         
+                          
+                          {{/each}}
+                         </select>
+                        </div>
+                                             
+                       
+                        
+                       
+                         <!-- File Button --> 
+                        <div class="form-group">
+                          {{!-- <label class="col-md-4 control-label"  for="filebutton">main_image</label> --}}
+                          <div class="col-md-4">
+                            <input id="filebutton" name="image" class="input-file" type="file" required="">
+                          </div>
+                        </div>
+                       
+                        <!-- Button -->
+                        <div class="form-group">
+                          
+                          <div class="col-md-4">
+                            <button id="singlebutton" type="submit" name="singlebutton" class="btn btn-primary">Add</button>
+                          </div>
+                          </div>
+                        
+                        </fieldset>
+                        </form>
+                        
+                          <!-- end of form -->
+                  </div>
+                  <!-- end of col-sm-12 -->
+              </div>
+              <!-- end of row -->
+          </div>
+          </div>
+          <!-- end of container-fluid -->
+      </section>
+     
+
+
+
+
+
+
+  
+

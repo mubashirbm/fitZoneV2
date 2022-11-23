@@ -1,0 +1,131 @@
+
+
+
+
+
+	<!-- Start Banner Area -->
+	<section class="banner-area organic-breadcrumb">
+		<div class="container">
+			<div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+				<div class="col-first">
+					<h1>Confirmation</h1>
+					<nav class="d-flex align-items-center">
+						<a href="index.html">Home<span class="lnr lnr-arrow-right"></span></a>
+						<a href="category.html">Confirmation</a>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- End Banner Area -->
+
+	<!--================Order Details Area =================-->
+	<section class="order_details section_gap">
+		<div class="container">
+			<h3 class="title_confirmation">Thank you. Your order has been Placed.</h3>
+			<div class="row order_d_inner">
+				<div class="col-lg-4">
+					<div class="details_item">
+						<h4>Order Info</h4>
+						<ul class="list">
+							<li><a href="#"><span>Order number</span> : {{order._id}}</a></li>
+							<li><a href="#"><span>Date</span> : {{order.Date}}</a></li>
+							<li><a href="#"><span>Total</span> : {{order.total}} . Rs</a></li>
+							<li><a href="#"><span>Payment method</span> : {{order.paymentMethod}}</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-lg-4">
+					<div class="details_item">
+						{{!-- <h4>Billing Address</h4> --}}
+						{{!-- <ul class="list">
+							<li><a href="#"><span>Street</span> : 56/8</a></li>
+							<li><a href="#"><span>City</span> : {{order.city}}</a></li>
+							<li><a href="#"><span>Country</span> : {{order.state}}</a></li>
+							<li><a href="#"><span>Postcode </span> : {{order.pinCode}}</a></li>
+						</ul> --}}
+					</div>
+				</div>
+				<div class="col-lg-4">
+					<div class="details_item">
+						<h4>Shipping Address</h4>
+						<ul class="list">
+							<li><a href="#"><span>Address</span>: {{order.orderDetails.name}},{{order.orderDetails.house_no}}</a></li>
+							
+							<li><a href="#"><span></span>  {{order.orderDetails.house_no}} {{order.orderDetails.area}}</a></li>
+							<li><a href="#"><span></span>  {{order.orderDetails.city}} ,{{order.orderDetails.district}} </a></li>
+							<li><a href="#"><span></span>  {{order.orderDetails.state}} ,{{order.orderDetails.pinCode}}</a></li>
+							{{!-- <li><a href="#"><span>City</span> :{{order.orderDetails.city}}</a></li> --}}
+							{{!-- <li><a href="#"><span>House Nmber,Building Number</span> : {{order.orderDetails.house_no}}</a></li>
+							<li><a href="#"><span>Road Name,area</span> : {{order.orderDetails.state}}</a></li>
+
+							
+							<li><a href="#"><span>State</span> : {{order.orderDetails.state}}</a></li>
+							<li><a href="#"><span>Postcode </span> :{{order.orderDetails.pinCode}}</a></li> --}}
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="order_details_table">
+				<h2>Order Details</h2>
+				<div class="table-responsive">
+					<table class="table">
+						<thead>
+							<tr>
+								<th scope="col">Product</th>
+								<th scope="col">Quantity</th>
+								<th scope="col">Price</th>
+							</tr>
+						</thead>
+						<tbody>
+                            {{#each products}}
+							<tr>
+								<td>
+									<p>{{product.name}}</p>
+								</td>
+								<td>
+									<h5>x {{quantity}}</h5>
+								</td>
+								<td>
+									<p>{{product.price}}</p>
+								</td>
+                                {{/each}}
+							</tr>
+							
+							
+							{{!-- <tr>
+								<td>
+									<h4>Shipping</h4>
+								</td>
+								<td>
+									<h5></h5>
+								</td>
+								<td>
+									<p>Flat rate: $50.00</p>
+								</td>
+							</tr> --}}
+							<tr>
+								<td>
+									<h4>Total</h4>
+								</td>
+								<td>
+									<h5></h5>
+								</td>
+								<td>
+									<p>{{order.total}}</p>
+								</td>
+							</tr>
+						</tbody>
+						
+					</table>
+					
+				</div>
+				
+			</div>
+			 <a class="primary-btn float-right mt-5" href='/viewOrders'>View Orders</a>
+		</div>
+	</section>
+	
+	<!--================End Order Details Area =================-->
+
+	
