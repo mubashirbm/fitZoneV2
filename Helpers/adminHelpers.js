@@ -356,6 +356,7 @@ module.exports = {
         })
     },
     updateBanner: (bannerId, editbanner) => {
+        console.log(bannerId,"banner id",editbanner,"editbanner");
         return new Promise((resolve, reject) => {
             try {
 
@@ -380,7 +381,7 @@ module.exports = {
             try {
                 db.get().collection(collections.BANNER_COLLECTION).findOne({ _id: objectId(bannerId) }).then((response) => {
                     resolve(response)
-                    console.log(resolve, "resolve");
+                    // console.log(resolve, "resolve");
                 })
             } catch (error) {
                 reject(error)

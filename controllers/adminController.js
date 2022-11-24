@@ -396,7 +396,7 @@ module.exports = {
       let image = req.files.image
       image.mv('./public/banner-image/' + id + '.jpg', (err, done) => {
         if (!err) {
-          res.redirect('/admin/add-product')
+          res.redirect('/admin/banner')
         } else {
           console.log(err)
         }
@@ -404,11 +404,11 @@ module.exports = {
     })
   },
 
-  editBanner: async (req, res,next) => {
+  editBanner: async(req, res,next) => {
     try {
-      console.log("edit banner rout");
-      let banner = await adminhelpers.bannerDetails(req.params.id)
-      adminHelpers.updateBanner(banner)
+      console.log("edit bannessr rout");
+      let banner=await adminhelpers.bannerDetails(req.params.id)
+      // adminHelpers.updateBanner(banner)
       console.log(banner, "...........");
   
       res.render('admin/edit-banner', { banner, layout: 'adminLayout' })
@@ -429,6 +429,7 @@ module.exports = {
   },
 
   postEditBanner: (req, res) => {
+    console.log("ssssssssssss");
     adminhelpers.updateBanner(req.params.id, req.body).then(() => {
       let id = req.params.id
       if (req?.files?.image) {
@@ -436,6 +437,7 @@ module.exports = {
         image.mv('./public/banner-image/' + id + '.jpg')
       }
       res.redirect('/admin/banner')
+
     })
   },
 
