@@ -508,7 +508,7 @@
                 if (response.expired) {
                     alert("Sorry coupon have expired")
                 } else if (response.notAvailable) {
-                    alert("Invalid coupon")
+                   // alert("Invalid coupon")
                 } else if (response.used) {
                     alert("Coupon already used")
                 } else {
@@ -517,7 +517,7 @@
                     
                         var discount = response.Discount
                         var percentage=Total*discount/100
-                        var grandTotal = Total - discount
+                        var grandTotal = Total - percentage
                         console.log(Total,'grand')
                         console.log(percentage,'percentage')
                          document.getElementById('offer').innerHTML = discount 

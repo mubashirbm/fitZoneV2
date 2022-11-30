@@ -40,9 +40,21 @@
                         </div>
                         <div class="form-group">
                             {{!-- <label for="exampleFormControlFile1">Example file input</label> --}}
-                            <input type="file" class="form-control-file" id="exampleFormControlFile1" name="image" onchange="viewImage(event)">
+                            <div>
+                            <label for="Imageid" id="image-div"><i class="fa fa-plus" aria-hidden="true"
+                                    style="font-size:45px; border:1px solid black;padding:25px;cursor:pointer"></i></label>
+                            <input type="file" id="Imageid" name="Image" class="form-control-file"
+                                style="display:none;visibility:none;" onchange="viewImage(event)"
+                                accept="image/jpg,image/jpeg" multiple>
 
-                            <img src="/product-image/{{products._id}}.jpg" alt="" style="width:50px; height: 50px;" id="imageview">
+                            <img id="image-show-0" src="/admin/product-Images/{{proDetails.Image.[0]}}" alt=""
+                                style="width:100px ;height:auto;">
+                            <img id="image-show-1" src="/admin/product-Images/{{proDetails.Image.[1]}}" alt=""
+                                style="width:100px ;height:auto;">
+                            <img id="image-show-2" src="/admin/product-Images/{{proDetails.Image.[2]}}" alt=""
+                                style="width:100px ;height:auto;">
+
+                        </div>
                         </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>

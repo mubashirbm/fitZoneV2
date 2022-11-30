@@ -35,12 +35,12 @@
                         
                          {{#each products}}
 
-                        <tr >
+                        <tr id="{{this._id}}" >
                             <td>
 
                                 <div class="media">
                                     <div class="d-flex">
-                                        <img src="/product-image/{{this.product._id}}.jpg" alt=""
+                                        <img src="/product-Images/{{product.image.[0]}}" alt=""
                                             style="width: 100px; ;">
                                     </div>
                                     <div class="media-body">
@@ -50,7 +50,7 @@
 
                             </td>
                             <td>
-                                <h5>{{this.product.price}}</h5>
+                                <h5 id="price-{{this.product._id}}">{{this.product.price}}</h5>
                             </td>
                              
 
@@ -58,9 +58,9 @@
                                 {{!-- {{#each quantity}} --}}
                                 <div class="product_count" >
                                     <input type="text" name="qty" id="qtyy-{{this.product._id}}" maxlength="12" value={{this.quantity}}
-                                        title="Quantity:" class="input-text qty">
+                                        title="Quantity:" class="input-text qty" disabled>
                                     <button
-                                        onclick="increseQuantity('{{this._id}}','{{this.product._id}}',-1)"
+                                        onclick="increaseQuantity('{{this._id}}','{{this.product._id}}',-1)"
                                         class="increase items-count" type="button"><i
                                             class="lnr lnr-chevron-up"></i></button>
                                     <button onclick="reduceQuantity('{{this._id}}','{{this.product._id}}',+1)"
@@ -70,7 +70,7 @@
                                 </div>
                             </td>
                             <td>
-                                <h5>{{this.total}}</h5>
+                                <h5 id="prodTotal{{this.product._id}}">{{this.total}}</h5>
                             </td>
                             <td>
 
@@ -97,15 +97,10 @@
                             <td>
                                 <div>
                                     <span class="text-danger ">Total  Price</span>
-                                    <span  class="gray_btn">{{Total}}</span>
+                                    <span id="cartTotal" class="gray_btn">{{Total}}</span>
                                 </div>
                                 
-                                {{!-- <div class="cupon_text d-flex align-items-center">
-                                    <input type="text" placeholder="Coupon Code">
-                                    <a class="primary-btn" href="#">Apply</a>
-                                    <span> </span>
-                                    <a class="gray_btn" href="#">Total</a>
-                                </div> --}}
+                                
                             </td>
                             <td>
                                
@@ -132,66 +127,11 @@
                                     <a class="primary-btn" href='/checkout'>Proceed to checkout</a>
                                 </div>
                                 
-                                {{!-- <div class="cupon_text d-flex align-items-center">
-                                    <input type="text" placeholder="Coupon Code">
-                                    <a class="primary-btn" href="#">Apply</a>
-                                    <span> </span>
-                                    <a class="gray_btn" href="#">Total</a>
-                                </div> --}}
+                                
                             </td>
                         </tr>
 
-                        {{!-- <tr class="shipping_area">
-                            <td>
-
-                            </td>
-                            <td>
-
-                            </td>
-                            <td>
-                                <h5>Shipping</h5>
-                            </td>
-                            <td>
-                                <div class="shipping_box">
-                                    <ul class="list">
-                                        <li><a href="#">Flat Rate: $5.00</a></li>
-                                        <li><a href="#">Free Shipping</a></li>
-                                        <li><a href="#">Flat Rate: $10.00</a></li>
-                                        <li class="active"><a href="#">Local Delivery: $2.00</a></li>
-                                    </ul>
-                                    <h6>Calculate Shipping <i class="fa fa-caret-down" aria-hidden="true"></i></h6>
-                                    <select class="shipping_select">
-                                        <option value="1">Bangladesh</option>
-                                        <option value="2">India</option>
-                                        <option value="4">Pakistan</option>
-                                    </select>
-                                    <select class="shipping_select">
-                                        <option value="1">Select a State</option>
-                                        <option value="2">Select a State</option>
-                                        <option value="4">Select a State</option>
-                                    </select>
-                                    <input type="text" placeholder="Postcode/Zipcode">
-                                    <a class="gray_btn" href="#">Update Details</a>
-                                </div>
-                            </td>
-                        </tr> --}}
-                        {{!-- <tr class="out_button_area">
-                            <td>
-
-                            </td>
-                            <td>
-
-                            </td>
-                            <td>
-
-                            </td>
-                            <td>
-                                <div class="checkout_btn_inner d-flex align-items-center">
-                                    <a class="gray_btn" href="#">Continue Shopping</a>
-                                    <a class="primary-btn" href="#">Proceed to checkout</a>
-                                </div>
-                            </td>
-                        </tr> --}}
+                       
 
                     </tbody>
                 </table>
@@ -216,12 +156,17 @@
                     Swal.fire({
                         icon: 'success',
                         title: 'Your Item has been Removed',
-                        showConfirmButton: true,
+                        timer:1700,
+                        showConfirmButton: false,
+                        
 
                     })
                     setTimeout(() => {
                     location.reload()
                     }, 1200)
+                    //let cartCount = parseInt(document.getElementById('cartCount').innerHTML)
+				//	cartCount-=1
+				//	document.getElementById('cartCount').innerHTML  = cartCount
 
                 }
 
@@ -232,12 +177,10 @@
 </script>
 <script>
     function reduceQuantity(userCartId,prodId,count) {
-             console.log('kjghgjhgfjgh')
         let qty=document.getElementById(`qtyy-${prodId}`).value
-        console.log('kjghgjhgfjgh')
         console.log(qty,"ithann quantity")
        if(qty<=1){
-      
+
        }else{
         $.ajax({
             url: '/change-product-quantity',
@@ -248,20 +191,23 @@
             },
             method: 'post',
             success: (response) => {
+                console.log(response)
                 if(response.status){
+                    console.log(response,'asdasdasasd1211212')
+                    let prodQuantity = document.getElementById(`qtyy-${prodId}`).value
+                    document.getElementById(`qtyy-${prodId}`).value = prodQuantity - 1
+                    document.getElementById('prodTotal'+prodId).innerHTML = parseInt(document.getElementById(`price-${prodId}`).innerHTML) * parseInt(document.getElementById(`qtyy-${prodId}`).value)
+                    document.getElementById('cartTotal').innerHTML = response.total
                     //location.reload()
-                    $('#cartRefresh').load(location.href + "#cartRefresh")
+                    //$('#cartRefresh').load(location.href + "#cartRefresh")
                 }
             }
         })
        }
-        
-    
     }
 </script>
 <script>
-    function increseQuantity(userCartId,prodId,count) {
-        
+    function increaseQuantity(userCartId,prodId,count) {
         $.ajax({
             url: '/change-product-quantity',
             data:{
@@ -272,7 +218,11 @@
             method: 'post',
             success: (response) => {
                 if(response.status){
-                     $('#cartRefresh').load(location.href + " #cartRefresh")
+                    let prodQuantity = parseInt(document.getElementById(`qtyy-${prodId}`).value)
+                    document.getElementById(`qtyy-${prodId}`).value = prodQuantity + 1
+                    document.getElementById('prodTotal'+prodId).innerHTML = parseInt(document.getElementById(`price-${prodId}`).innerHTML) * parseInt(document.getElementById(`qtyy-${prodId}`).value)
+                document.getElementById('cartTotal').innerHTML = response.total
+                
                 }
             }
         })

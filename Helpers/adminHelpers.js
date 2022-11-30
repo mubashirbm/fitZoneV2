@@ -89,6 +89,7 @@ module.exports = {
           for (i = 0; i < categories.length; i++) {
             categoryNames.push(categories[i].category);
           }
+          console.log(categories,'cate');
           resolve(categoryNames);
         });
       },
@@ -121,15 +122,17 @@ module.exports = {
     },
 
     addProduct: (product) => {
-        return new Promise((resolve, reject) => {
+        return new Promise(async(resolve, reject) => {
             try {
                 product.price = parseInt(product.price)
                 product.quantity = parseInt(product.quantity)
                 product.Realprice = parseInt(product.Realprice)
-                db.get().collection('PRODUCT').insertOne(product).then((data) => {
-                    let id = data.insertedId.toString()
-                    resolve(id)
-                })
+                let data = await db.get().collection(collections.PRODUCT_COLECTIONS).insertOne(product)
+                resolve(data.insertedId)
+                // db.get().collection('PRODUCT').insertOne(product).then((data) => {
+                //     let id = data.insertedId.toString()
+                //     resolve(id)
+                // })
             } catch (error) {
                 reject(error)
             }
@@ -311,9 +314,11 @@ module.exports = {
     addCoupon: (admindata) => {
         return new Promise(async (resolve, reject) => {
             try {
+                console.log(admindata.name);
                 admindata.name = admindata.name.toUpperCase()
                 admindata.Minimum_Purchase = parseInt(admindata.Minimum_Purchase)
                 admindata.Discount = parseInt(admindata.Discount)
+                admindata.status=true
                 let couponExist = await db.get().collection(collections.COUPON_COLLECTION).findOne(({ name: admindata.name }))
                 if (couponExist) {
                     resolve({ Exist: true })
@@ -408,8 +413,13 @@ module.exports = {
 
     totalRevenue: () => {
         return new Promise(async (resolve, reject) => {
+           console.log("helo");
             try {
+                // let totalrevenue=0
                 let totalrevenue = await db.get().collection(collections.ORDER_COLLECTION).aggregate([
+                    {
+                        $match: { status: "Delivered" }  
+                    },
                     {
                         $group: {
                             _id: null,
@@ -418,9 +428,15 @@ module.exports = {
                     }
                 ]).toArray()
                 //   console.log(totalrevenue,"tottall revenuee");
-                resolve(totalrevenue[0])
+                console.log(totalrevenue[0],'total revenue aggregation');
+                totalrevenue.length === 0 ? resolve(totalrevenue = 0): resolve(totalrevenue[0])
+                    // totalrevenue = 0
+                    
+                
+                // resolve(totalrevenue[0])
 
             } catch (error) {
+                console.log(error);
                 reject(error)
             }
         })
@@ -549,14 +565,58 @@ module.exports = {
             totalCategRevenue += categoryRevenue[i].total;
           }
           resolve(totalCategRevenue);
+          console.log(totalCategRevenue,'totalCategory');
         //   console.log(totalCategRevenue,"categ revenue")
         });
       },
+    //   getMonthlySalesBarGraph: () => {
+    //     return new Promise(async(resolve, reject) => {
+    //       let today = new Date();
+    //       let before = new Date(today.getTime() - 250 * 24 * 60 * 60 * 1000).toLocaleString();
+    //       console.log(today,'.........',before);
+    //       let monthlySales = await db
+    //         .get()
+    //         .collection(collections.ORDER_COLLECTION)
+    //         .aggregate([
+    //           {
+    //             $match: {
+    //               status: "Delivered",
+    //               Date: {
+    //                 $gte: before,
+    //                 $lte: today.toLocaleString(),
+    //               },
+    //             }, 
+    //           },
+    //           {
+    //             $project: {
+    //               _id:0,
+    //               Date: 1,
+    //               total: 1,
+    //             },
+    //           },
+    //           {     
+    //             $group: {       
+    //                 _id: {
+    //                     Date: "$Date",
+    //                 },
+    //                 total:{
+    //                     $sum:"$total"
+    //                 }
+    //             }
+    //           }
+    //         ])
+    //         .toArray();
+    //         console.log(monthlySales,'monthlySales');
+    //         resolve(monthlySales)
+           
+    //     });
+    //   },
+
+
       getMonthlySalesBarGraph: () => {
         return new Promise(async(resolve, reject) => {
           let today = new Date();
-          let before = new Date(today.getTime() - 250 * 24 * 60 * 60 * 1000).toLocaleString();
-          console.log(today,'.........',before);
+          let before = new Date(today.getTime() - 250 * 24 * 60 * 60 * 1000);
           let monthlySales = await db
             .get()
             .collection(collections.ORDER_COLLECTION)
@@ -566,9 +626,9 @@ module.exports = {
                   status: "Delivered",
                   Date: {
                     $gte: before,
-                    $lte: today.toLocaleString(),
+                    $lte: today,
                   },
-                }, 
+                },
               },
               {
                 $project: {
@@ -579,21 +639,20 @@ module.exports = {
               },
               {
                 $group: {
-                    _id: {
-                        Date: "$Date",
-                    },
-                    total:{
-                        $sum:"$total"
-                    }
-                }
+                  _id: {
+                    Date: { $dateToString: { format: "%m-%Y", date: "$Date" } },
+                  },
+                  monthlySales: { $sum: "$total" },
+                },
               }
             ])
             .toArray();
-            // console.log(monthlySales,'sdhasdbasudba');
+            console.log(monthlySales,'monthly Sales');
             resolve(monthlySales)
-           
         });
       },
+
+
       getPaymentTypeMonthlyRevenue : (paymentMode)=>{
         console.log(paymentMode,'payment Mode')
         return new Promise(async(resolve, reject) => {

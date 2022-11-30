@@ -118,7 +118,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-xl-4 col-md-12">
+            {{!-- <div class="col-xl-4 col-md-12">
               <div class="card mat-clr-stat-card text-white green ">
                 <div class="card-block">
                   <div class="row">
@@ -145,7 +145,7 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div> --}}
             <!-- Material statustic card end -->
             <!-- order-visitor start -->
 
@@ -160,7 +160,9 @@
               </div>
             </div>
             <div class="col-xl-6 col-md-12">
+              
               <div class="card table-card">
+                <h4>Catogory Revenue</h4>
                 <canvas id="polarChart"></canvas>
               </div>
 
@@ -175,7 +177,7 @@
 
 
 
-
+<h4>Monthly Revenue</h4>
 
                   <canvas id="barChart"></canvas>
               </div>
@@ -204,7 +206,7 @@
 <script>
   //doughnut
   let chart1 = document.getElementById("doughnutChart").getContext('2d');
-  const dataB=['{{orderstatus.[0].count}}','{{orderstatus.[1].count}}','{{orderstatus.[2].count}}','{{ordercanceled.[0].count}}','{{ordercanceled.[1].count}}']
+  const dataB=['{{orderstatus.[0].count}}','{{orderstatus.[1].count}}','{{orderstatus.[2].count}}','{{ordercanceled.[1].count}}','{{ordercanceled.[0].count}}']
   console.log(dataB)
   let myLineChart = new Chart(chart1, {
     type: 'doughnut',
@@ -254,14 +256,14 @@
 //bar
 let chart3 = document.getElementById("barChart").getContext('2d');
 let months=  [ "Aug", "Sep", "Oct", "Nov","Dec"];
-let monthRevenue= [{{#each monthlyRevenue}} "{{this.total}}",{{/each}}];
+let monthRevenue= [{{#each monthlyRevenue}} '{{this.monthlySales}}',{{/each}}];
 console.log(monthRevenue,'monthRevenue')
 var myBarChart = new Chart(chart3, {
   type: 'bar',
   data: {
     labels: months,
     datasets: [{
-      label: '# of Votes',
+      label: '   monthly Revenue',
       data:monthRevenue,
       backgroundColor: [
         'rgba(255, 99, 132, 0.2)',
@@ -293,71 +295,4 @@ var myBarChart = new Chart(chart3, {
   }
 });
 </script>
-{{!-- <script>
-  //line
-  let chart4 = document.getElementById("Chart4 ").getContext('2d');
-  let month=["Aug", "Sep", "Oct", "Nov","Dec"];
-  let cod= [{{#each codRevenue}} "{{this.monthlySales}}",{{/each}}];
-  let razorPay= [{{#each onlineRevenue}} "{{this.monthlySales}}",{{/each}}];
-  console.log(cod,razorPay,"cod","razorpay")
-
-
-  let myLineChart = new Chart(chart4, {
-  type: 'line',
-  data: {
-    labels: month,
-    datasets: [{
-      label: "Cash On Delivery",
-      data: cod,
-      backgroundColor: [
-        'rgba(105, 0, 132, .2)',
-      ],
-      borderColor: [
-        'rgba(200, 99, 132, .7)',
-      ],
-      borderWidth: 2
-    }, 
-    {
-      label: "RazorPay",
-      data: razorPay,
-      backgroundColor: [
-        'rgba(0, 137, 132, .2)',
-      ],
-      borderColor: [
-        'rgba(0, 10, 130, .7)',
-      ],
-      borderWidth: 2
-    }
-    ]
-  },
-  options: {
-    responsive: true
-  }
-  });
-</script> --}}
-{{!-- <script>
-    var xValues = ["Aug", "Sep", "Oct", "Nov","Dec"];
-    var y1Values = [{{#each codRevenue}} "{{this.monthlySales}}",{{/each}}]
-    var y2Values = [{{#each onlineRevenue}} "{{this.monthlySales}}",{{/each}}]
-    new Chart("myChart", {
-    type: "line",
-    data: {
-        labels: xValues,
-        datasets: [{
-        data: y1Values,
-        borderColor: "red",
-        fill: false
-        }, { 
-        data: y2Values,
-        borderColor: "green",
-        fill: true
-        }], 
-    },
-    options: {
-        legend: { display: false }
-        
-    }
-    });
-</script> --}}
-
 

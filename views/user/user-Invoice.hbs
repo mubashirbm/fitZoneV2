@@ -1,0 +1,150 @@
+<button id="btn-print-this" class="btn btn-success" style="margin: 20px;"
+    onclick="print_current_page()">Download</button>
+
+
+<div class="offset-xl-2 col-xl-8 col-lg-12 col-md-12 col-sm-12 col-12 padding">
+    <div class="card" id="content">
+        <div class="card-header p-4">
+            <a class="pt-2 d-inline-block" href="" data-abc="true"><b><i>Fitzone</b></i></a>
+            <div class="float-right">
+                <h6 class="mb-0"> Date:{{order.Date}} <br>
+                    Invoice id:{{order._id}}
+                </h6>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row mb-4">
+                <div class="col-sm-6">
+                    <h5 class="mb-3">To:</h5>
+                    <h3 class="text-dark mb-1"></h3>
+                    <div>{{order.orderDetails.house_No}},{{order.orderDetails.area}}</div>
+                    {{!-- <div>Sikeston,New Delhi 110034</div> --}}
+                    <div>Pincode:{{order.orderDetails.pinCode}}</div>
+                    <div>Phone:{{order.orderDetails.phone}}</div>
+                </div>
+
+            </div>
+            <div class="table-responsive-sm">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th class="center">SI no</th>
+                            <th>Item</th>
+                            <th>Unit Price</th>
+                            {{!-- <th class="right">Unit discount%</th>
+                            <th class="center">unit discount</th> --}}
+                            <th class="right">quantity</th>
+                            <th class="right">total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each products}}
+                        <tr>
+                            <td class="center">{{inc @index}}</td>
+                            <td class="left strong">{{this.product.name}}</td>
+                            <td class="left">₹{{this.product.price}}</td>
+                            {{!-- <td class="right">%</td>
+                            <td class="center">₹</td> --}}
+                            <td class="right">{{this.quantity}}</td>
+                            <td class="right">₹{{this.proTotal}}</td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-sm-5">
+                </div>
+                <div class="col-lg-4 col-sm-5 ml-auto">
+                    <table class="table table-clear">
+                        <tbody>
+                            <tr>
+                                <td class="left">
+                                    <strong class="text-dark">Subtotal</strong>
+                                </td>
+                                <td class="right">₹{{order.total}}</td>
+                            </tr>
+                            {{!-- <tr>
+                                <td class="left">
+                                    <strong class="text-dark">Discount</strong>
+                                </td>
+                                <td class="right">₹</td>
+                            </tr> --}}
+                            <tr>
+                                <td class="left">
+                                    <strong class="text-dark">Coupon</strong>
+                                </td>
+                                <td class="right">₹{{order.discount}}</td>
+                            </tr>
+                            {{!-- <tr>
+                                <td class="left">
+                                    <strong class="text-dark">Wallet</strong>
+                                </td>
+                                <td class="right">₹{</td>
+                            </tr> --}}
+
+                            <tr>
+                                <td class="left">
+                                    <strong class="text-dark">Total</strong>
+                                </td>
+                                <td class="right">
+                                    <strong class="text-dark">₹{{order.total}}</strong>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer bg-white">
+            <p class="mb-0">Fitzone</p>
+        </div>
+    </div>
+</div>
+
+<style>
+    body {
+        background-color: #000;
+    }
+
+    .padding {
+        padding: 2rem !important;
+    }
+
+    .card {
+        margin-bottom: 30px;
+        border: none;
+        -webkit-box-shadow: 0px 1px 2px 1px rgba(154, 154, 204, 0.22);
+        -moz-box-shadow: 0px 1px 2px 1px rgba(154, 154, 204, 0.22);
+        box-shadow: 0px 1px 2px 1px rgba(154, 154, 204, 0.22);
+    }
+
+    .card-header {
+        background-color: #fff;
+        border-bottom: 1px solid #e6e6f2;
+    }
+
+    h3 {
+        font-size: 20px;
+    }
+
+    h5 {
+        font-size: 15px;
+        line-height: 26px;
+        color: #3d405c;
+        margin: 0px 0px 15px 0px;
+        font-family: 'Circular Std Medium';
+    }
+
+    .text-dark {
+        color: #3d405c !important;
+    }
+</style>
+
+<script>
+
+    $('#btn-print-this').click(function () {
+        window.print();
+        return false;
+    })
+</script>

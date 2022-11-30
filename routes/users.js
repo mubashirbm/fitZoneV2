@@ -68,6 +68,9 @@ router.get('/sample',userController.sample)
 router.get('/cancelOrder/:id',userVerified,userController.cancelOrder)
 
 
+router.get('/invoice/:id',userController.invoice)
+
+
 // shop
 router.get('/shop', userController.shop)
 router.get('/category-shop/:category', userController.categoryShop)

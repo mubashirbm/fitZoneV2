@@ -11,7 +11,23 @@ const adminHelpers = require('../Helpers/adminHelpers');
 const router = express.Router();
 const adminhelpers = require('../Helpers/adminHelpers')
 const categoryHelpers = require('../Helpers/categoryhelpers')
+const multer=require('multer')
 /* GET admin listing. */
+
+/* For Product Images  */
+var fileStorageEngine = multer.diskStorage({
+
+  destination: (req, file, cb) => {
+    console.log("000000000000000000000000000000000000");
+    cb(null, './public/product-Images')
+  },
+  filename: (req, file, cb) => {
+    console.log(file,"file");
+    cb(null, Date.now() + '--' + file.originalname)
+  }
+})
+
+var upload = multer({ storage: fileStorageEngine })
 
 
 
@@ -39,11 +55,12 @@ router.post('/signup', adminController.adminPostSignUp)
 
 // PRODUCT PAGE
 router.get('/add-product', adminVerified, adminController.addProduct)
-router.post('/add-product', adminController.postAddProduct)
+// router.post('/add-product',upload.array('Image', 3), adminController.postAddProduct)
+router.post('/add-product',adminVerified, upload.array('image', 3),adminController.postAddProduct)
 router.get('/view-products', adminVerified, adminController.viewProduct)
 router.get('/edit-product/:id', adminVerified, adminController.editProduct)
-router.post('/edit-product/:id', adminController.postEditProduct)
-router.get('/delete-product/:id', adminVerified, adminController.deleteProduct)
+router.post('/edit-product/:id',upload.array('image', 3), adminController.postEditProduct)
+router.get('/delete-product/:id', adminVerified,adminController.deleteProduct)
 
 // USER MANAGEMENT
 router.get('/view-user', adminVerified, adminController.viewUser)
@@ -60,6 +77,7 @@ router.get('/category-product/:category', adminVerified, adminController.categor
 
 // ORDER MANAGEMENT
 router.get('/order',adminVerified,adminController.viewOrder)
+router.get('/ViewOrderdProducts/:id',adminController.viewOrderProduct)
 router.get('/cancelOrder/:id',adminController.cancelOrder)
 router.get('/changeStatus/:id/:status',adminController.changeStatus)
 

@@ -31,6 +31,7 @@ module.exports={
 
 
         getAllCategory:(catId)=>{
+            console.log('get all category');
             return new Promise(async(resolve,reject)=>{
                 try {
                     let category=await db.get().collection(collections.CATEGORY_COLLECTIONS).find().toArray()

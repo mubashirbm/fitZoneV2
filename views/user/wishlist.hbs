@@ -39,7 +39,7 @@
                             
 
                             <td>
-                                <img src="/product-image/{{this._id}}.jpg" alt="" width="100px">
+                                <img src="/product-Images/{{this.image.[0]}}" alt="" width="100px">
                             </td>
                             <td>
                                
@@ -93,7 +93,8 @@
                     Swal.fire({
                         icon: 'success',
                         title: 'Your Item has been Removed',
-                        showConfirmButton: true,
+                        timer:1000,
+                        showConfirmButton: false,
                     })
                     setTimeout(() => {
                         document.getElementById(`${wishId}`).remove()
@@ -116,20 +117,24 @@
                     Swal.fire({
                         icon: 'success',
                         title: 'Already Added To Cart',
-                        showConfirmButton: true,
+                        timer:1000,
+                        showConfirmButton: false,
                     })
                 }
                 else {
                     Swal.fire({
                         icon: 'success',
                         title: 'Added To Cart',
-                        showConfirmButton: true,
+                        timer:1000,
+                        showConfirmButton: false,
                     })
+
+                    let cartCount = parseInt(document.getElementById('cartCount').innerHTML)
+					cartCount+=1
+					document.getElementById('cartCount').innerHTML  = cartCount
                 }
 
-                setTimeout(() => {
-                location.reload()
-                }, 1200)
+                
             }
         })
     }

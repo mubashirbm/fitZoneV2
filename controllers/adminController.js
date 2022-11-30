@@ -37,15 +37,15 @@ module.exports = {
     for(let i=0;i<categories.length;i++){
       var revenue = await adminHelpers.categoryRevenue(categories[i])
       categRevenues.push(revenue)
-     
+     console.log(revenue,'revenue');
     }
     console.log(monthlyRevenue,"monthly Revenue");
     console.log(categRevenues,'cateRevenuefdfd');
     console.log(orderstatus,'orderStatus');
     console.log(totalRevenue,'totalRevenue',totalUsers,'totalUsers',totalOrders,'totalOrders',totalProducts,'totalProducts',ordercanceled,'ordercanceled');
     if (admin) {
-      console.log('00')
-      res.render('admin/index', { layout: "adminLayout",admin,categRevenues,codRevenue,onlineRevenue, monthlyRevenue,categories,totalRevenue:totalRevenue.totalRevenue,totalUsers,totalOrders,totalProducts,orderstatus,ordercanceled })
+    totalRevenue === 0 ? totalRevenue = 0 : totalRevenue = totalRevenue.totalRevenue
+      res.render('admin/index', { layout: "adminLayout",admin,categRevenues,codRevenue,onlineRevenue, monthlyRevenue,categories,totalRevenue,totalUsers,totalOrders,totalProducts,orderstatus,ordercanceled })
     } else {
       console.log('11')
       res.redirect('/login')
@@ -115,23 +115,36 @@ module.exports = {
    
   },
 
-  postAddProduct: (req, res,next) => {
+  postAddProduct: async(req, res,next) => {
+console.log("here");
+    // try {
+    //   console.log(req.files);
+    //   adminhelpers.addProduct(req.body).then((id) => {
+    //     // console.log('id')
+    //     let image = req.files.image
+    //     image.mv('./public/product-image/' + id + '.jpg', (err, done) => {
+    //       if (!err) {
+    //         res.redirect('/admin/add-product')
+    //       } else {
+    //         console.log(err)
+    //       }
+    //     })
+    //   })
+    // } catch (error) {
+    //   next(error)
+    // }
     try {
-      console.log(req.files);
-      adminhelpers.addProduct(req.body).then((id) => {
-        // console.log('id')
-        let image = req.files.image
-        image.mv('./public/product-image/' + id + '.jpg', (err, done) => {
-          if (!err) {
-            res.redirect('/admin/add-product')
-          } else {
-            console.log(err)
-          }
-        })
-      })
-    } catch (error) {
+      const Images = []
+      for (i = 0; i < req.files.length; i++) {
+          Images[i] = req.files[i].filename
+      }
+      req.body.image = Images
+      await adminHelpers.addProduct(req.body)
+      res.redirect('/admin/add-product')
+  } catch (error) {
+      console.log(error);
       next(error)
-    }
+  }
   
   },
 
@@ -147,6 +160,7 @@ module.exports = {
   
       })
     } catch (error) {
+      console.log(error);
       next(error)
     }
     
@@ -163,19 +177,42 @@ module.exports = {
   
   },
 
-  postEditProduct: (req, res,next) => {
+  postEditProduct: async(req, res,next) => {
+    // try {
+      // adminhelpers.updateProduct(req.params.id, req.body).then(() => {
+      //   let id = req.params.id
+      //   if (req?.files?.image) {
+      //     let image = req.files.image
+      //     image.mv('./public/product-image/' + id + '.jpg')
+      //   }
+      //   res.redirect('/admin/view-products')
+      // })
+    // } catch (error) {
+      // next(error)
+    // }
+
     try {
-      adminhelpers.updateProduct(req.params.id, req.body).then(() => {
-        let id = req.params.id
-        if (req?.files?.image) {
-          let image = req.files.image
-          image.mv('./public/product-image/' + id + '.jpg')
-        }
-        res.redirect('/admin/view-products')
-      })
-    } catch (error) {
+      let id = req.params.id
+      const editImg = []
+      for (i = 0; i < req.files.length; i++) {
+          editImg[i] = req.files[i].filename
+      }
+      req.body.image = editImg
+      var oldImage = await adminHelpers.updateProduct(id, req.body)
+      if (oldImage) {
+          for (i = 0; i < oldImage.length; i++) {
+              var oldImagePath = path.join(__dirname, '../public/product-Images/' + oldImage[i])
+              fs.unlink(oldImagePath, function (err) {
+                  if (err)
+                      return
+              })
+          }
+      }
+      res.redirect('/admin/view-products')
+  } catch (error) {
+      console.log(error);
       next(error)
-    }
+  }
    
   },
 
@@ -355,6 +392,7 @@ module.exports = {
   },
 
   postAddCoupon: (req, res) => {
+    console.log(req.body);
     adminHelpers.addCoupon(req.body).then(async (response) => {
       if (response.Exist) {
         req.session.couponError = true
@@ -451,6 +489,14 @@ module.exports = {
       next(error)
     }
     
+  },
+  viewOrderProduct: async (req, res,next) => {
+    // log(11111111111111111111111111)
+    console.log(req.params.id, "req.paraaaaams")
+    let products = await userhelpers.getAllOrderProducts(req.params.id)
+    console.log(products, 58514);
+    res.render('admin/orderedProducts', { layout :'adminlayout',admin: req.session.admin, products })
+
   },
 
 

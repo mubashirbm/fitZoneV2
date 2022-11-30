@@ -1,30 +1,19 @@
-<section class="banner-area organic-breadcrumb">
-    <div class="container">
-        <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
-            <div class="col-first">
-                <h1>Ordered Products</h1>
-                <nav class="d-flex align-items-center">
-                    <a href="/home">Home<span class=""></span></a>
-                    <a href="#"></a>
-                </nav>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- End Banner Area -->
-
-<!--================Cart Area =================-->
-<section class="cart_area">
-    <div class="container">
-        <div class="cart_inner">
-            <div class="table-responsive">
+<section class="login-block">
+  <div class="pcoded-content">
+    <!-- Container-fluid starts -->
+    <div class="container ">
+      <div class="row ">
+        <div class="col-sm-12 ">
+          <div class="row mt-4">
+           <h4>Ordered Product</h4>
+          </div>
                 <table class="table">
                     <thead>
                         <tr>
 
                             <th scope="col">Product</th>
                             <th scope="col">Name</th>
-                            
+                            {{!-- <th></th> --}}
                             <th scope="col">Price</th>
 
                         </tr>
@@ -39,12 +28,14 @@
                                 <img src="/product-Images/{{product.image.[0]}}" alt="" width="100px">
                             </td>
                             <td>
-                               
+                                {{#if empty}}
+                                <h1></h1>
+                                {{/if}}
                                 <h5>{{this.product.name}}</h5>
                             </td>
                             {{!-- <td></td> --}}
                             <td>
-                                <h5>{{this.price}}</h5>
+                                <h5>{{this.product.price}}</h5>
                             </td>
                            
 
@@ -67,9 +58,10 @@
 
                     </tbody>
                 </table>
-                <a class="gray_btn" href="/shop">BACK TO SHOP</a>
-            </div>
+                {{!-- <a class="gray_btn" href="/shop">BACK TO SHOP</a> --}}
         </div>
+      </div>
     </div>
+  </div>
 </section>
 

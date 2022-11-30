@@ -1,25 +1,13 @@
-{{!-- <section class="banner-area organic-breadcrumb">
-    <div class="container">
-        {{!-- <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end"> --}}
-            <div class="col-first d-flex flex-wrap align-items-center justify-content-center mt-5">
+<section class="login-block">
+        <div class="pcoded-content">
+          <!-- Container-fluid starts -->
+          <div class="container ">
+              <div class="row ">
+                  <div class="col-sm-12 ">
+        <div class="row mt-4 mb-4 " >
+           <h4 class="">Sales Report</h4>
+        </div>
 
-                <nav class="d-flex align-items-center ">
-                    {{!-- <a href="/home">Home<span class="lnr lnr-arrow-right"></span></a> --}}
-                    {{!-- <a href="#">wishlist</a> --}}
-                </nav>
-            </div>
-            {{!--
-        </div> --}}
-    </div>
-</section> --}}
-<div class="col-first d-flex flex-wrap align-items-center justify-content-center mt-5">
-    <h1>Orders</h1>
-</div>
-<section class="pcoded-content ml-5">
-    <div class="pcoded-content ">
-
-        <div class="cart_inner">
-            <div class="table-responsive">
                 <table class="table">
                     <thead>
                         <tr>
@@ -33,6 +21,7 @@
 
                             <th scope="col">Payment_Method</th>
                             <th scope="col">Status</th>
+                            <th></th>
 
 
                         </tr>
@@ -49,6 +38,7 @@
 
                             <td>
                                 <h5>{{this.Date}}</h5>
+                            </td>
 
                             <td>
                                 <h5>{{this.name}}{{this.orderDetails.city}}{{this.orderDetails.district}}{{this.orderDetails.state}}
@@ -87,13 +77,13 @@
                             </td>
 
                             <td>
-                                <button class="btn btn"><a href="/viewOrderProducts/{{this._id}}">View Products</a>
+                                <button class="btn btn"><a href="/admin/ViewOrderdProducts/{{this._id}}">View Products</a>
                                 </button>
 
 
                             </td>
-                            <td><button class="btn "><a href="/admin/cancelOrder/{{this._id}}">Cancel Order</a>
-                                </button></td>
+                            {{!-- <td><button class="btn "><a href="/admin/cancelOrder/{{this._id}}">Cancel Order</a>
+                                </button></td> --}}
 
                         </tr>
                         {{/each}}
@@ -114,9 +104,11 @@
 
                     </tbody>
                 </table>
-
-            </div>
-
+                  </div>
+              </div>
+          </div>
         </div>
-    </div>
 </section>
+
+
+          

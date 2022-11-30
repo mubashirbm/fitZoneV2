@@ -60,15 +60,28 @@
                         </div>
                                              
                        
-                        
+                         {{!-- <input id="filebutton" name="image" class="input-file" type="file" required="" > --}}
                        
                          <!-- File Button --> 
-                        <div class="form-group">
-                          {{!-- <label class="col-md-4 control-label"  for="filebutton">main_image</label> --}}
-                          <div class="col-md-4">
-                            <input id="filebutton" name="image" class="input-file" type="file" required="">
-                          </div>
+                        <div class="row form-group">
+                    <div class="col col-md-3"><label for="file-input" class=" form-control-label">Choose Image</label>
+                    </div>
+                    <div class="col-12 col-md-9">
+                        <div>
+                            <label for="Imageid" id="image-div"><i class="fa fa-plus" aria-hidden="true"
+                                    style="font-size:45px; border:1px solid black;padding:25px;cursor:pointer"></i></label>
+                            <input type="file" id="Imageid" name="image" class="form-control-file"
+                                style="display:none;visibility:none;" onchange="getImage(event)"
+                                accept="image/jpg,image/jpeg" multiple required>
+
+                            <img id="image-show-0" src="" alt="" style="width:100px ;height:auto;">
+                            <img id="image-show-1" src="" alt="" style="width:100px ;height:auto;">
+                            <img id="image-show-2" src="" alt="" style="width:100px ;height:auto;">
+
                         </div>
+
+                    </div>
+                </div>
                        
                         <!-- Button -->
                         <div class="form-group">
@@ -91,7 +104,32 @@
           <!-- end of container-fluid -->
       </section>
      
+<script>
+    function getImage(event) {
+        let inputDiv = document.getElementById('image-div')  // This is given for when we add images upto limit we dont need to display the option for adding image. In below we are displaying it none
+        if (event.target.files && event.target.files[0]) {
+            console.log(event.target.files) //There will a be a Filelist. It contains 'FileList {0: File, 1: File, length: 2}' and also there is a details of images too like lastmodified,date etc
+            let leng = event.target.files.length
+            console.log(leng)
+            if (leng > 3) {
+                document.getElementById('Imageid').value = null //This is given, if we select images more than the limit value inside ImageId should be 
+                alert('3 pictures are allowed')
+            } else {
 
+                for (let i = 0; i < leng; i++) {
+                    if (i == 2) {
+                        inputDiv.style.display = 'none'
+                    }
+                    let one = document.getElementById('image-show-' + [i]) //Used to show image according to image tag
+                    one.style.display = 'inline'
+                    one.src = URL.createObjectURL(event.target.files[i]) //Used to get the image using the image url
+
+                }
+            }
+        }
+
+    }
+</script>
 
 
 

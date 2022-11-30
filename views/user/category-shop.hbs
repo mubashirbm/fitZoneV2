@@ -76,7 +76,7 @@
 						<div class="col-lg-4 col-md-6">
 							<div class="single-product">
 								{{!-- <img class="img-fluid" src="/product-image/{{this._id}}.jpg" alt=""> --}}
-								<a href="/product_details/{{this._id}}"><img class="img-fluid img-thumbnail" src="/product-image/{{this._id}}.jpg" alt="" style="height:300px ;"></a>
+								<a href="/product_details/{{this._id}}"><img class="img-fluid img-thumbnail" src="/product-Images/{{this.image.[0]}}" alt="" style="height:300px ;"></a>
 								<div class="product-details">
 									<h6>{{this.name}}</h6>
 									<p>{{this.description}}</p>
@@ -280,6 +280,7 @@
 					Swal.fire({
 						icon: 'info',
 						title: 'Please Login',
+						timer: 1000,
 						showConfirmButton: false,
 					})
 				}
@@ -288,13 +289,15 @@
 					Swal.fire({
 						icon: 'success',
 						title: 'Already Added To Wishlist',
-						showConfirmButton: true,
+						timer: 1000,
+						showConfirmButton: false,
 					})
 				}else{
 						Swal.fire({
 						icon: 'success',
 						title: 'Added To Wishlist',
-						showConfirmButton: true,
+						timer: 1000,
+						showConfirmButton: false,
 					})
 				}
 				setTimeout(() => {
@@ -315,6 +318,7 @@
 					Swal.fire({
 						icon: 'info',
 						title: 'Please Login',
+						timer: 1000,
 						showConfirmButton:false,
 					})
 				}
@@ -322,14 +326,16 @@
 					Swal.fire({
 						icon: 'success',
 						title: 'Already Added To Cart',
-						showConfirmButton: true,
+						timer: 1000,
+						showConfirmButton: false,
 					})
 				}
 				else{
 						Swal.fire({
 						icon: 'success',
 						title: 'Added To Cart',
-						showConfirmButton: true,
+						timer: 1000,
+						showConfirmButton:false,
 					})
 				}	
 					setTimeout(() => {		

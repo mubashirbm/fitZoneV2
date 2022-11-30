@@ -7,14 +7,14 @@ const logger = require('morgan');
 const nocache=require('nocache')
 const Swal=require('sweetalert2')
  
-const paginate = require('handlebars-paginate');
+// const paginate = require('handlebars-paginate');
 
 
 const adminRouter = require('./routes/admin');
 const usersRouter = require('./routes/users');
 
 const app = express();
-const fileUpload = require('express-fileupload')
+// const fileUpload = require('express-fileupload')
 const db=require('./confiq/connection')
 const session=require('express-session')
 const hbs=require('express-handlebars')
@@ -34,9 +34,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(fileUpload())
+// app.use(fileUpload())
 
-// paginate
+
+
+app.use(function(req,res,next){
+  res.header('Cache-Control','no-cache,private,no-store,must-revalidate,max-stale=0,post-check=0,pre-check=0');
+  next();
+})
 
 
 
@@ -52,7 +57,7 @@ app.use(flash())
 //Database Connection
 db.connect((err)=>{
   if(err)console.log("database error"+err)
-else console.log("database connected");  
+else console.log("database connected to Local");  
 })
 
 app.use('/', usersRouter);
@@ -71,7 +76,7 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.render('error',{layout:"error.hbs"});
 });
 
 module.exports = app;
