@@ -340,7 +340,7 @@ console.log("here");
     try {
       let orders = await adminHelpers.getAllOrders()
       // console.log(orders,"orders in admin");
-      res.render('admin/viewOrder', { layout: "adminlayout", orders })
+      res.render('admin/view-order', { layout: "adminlayout", orders })
     } catch (error) {
       next(error)
     }
