@@ -336,11 +336,18 @@ console.log("here");
     res.redirect('/admin')
   },
 
-  viewOrder: async (req, res,next) => {
+  viewOrder: (req, res,next) => {
     try {
-      let orders = await adminHelpers.getAllOrders()
-      // console.log(orders,"orders in admin");
-      res.render('admin/view-Order', { layout: "adminlayout", orders })
+      adminHelpers.getAllOrders()
+        .then(data => {
+          console.log(data);
+          res.render('admin/view-Order', { layout: "adminlayout", orders: data })
+        })
+        .catch(err => {
+          console.log(err);
+          next(err)
+        })
+      
     } catch (error) {
       next(error)
     }
