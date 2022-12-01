@@ -360,11 +360,11 @@ module.exports = {
   },
 
   viewOrderProduct: async (req, res, next) => {
-    // console.log(req.params.id, "req.paraaaaams")
+    console.log(req.params.id, "req.paraaaaams")
     let products = await userhelpers.getAllOrderProducts(req.params.id)
 
     // console.log(products, 58514);
-    res.render('user/OrderedProducts', { user: req.session.user, products })
+    res.render('user/orderedProducts', { user: req.session.user, products })
 
   },
 
