@@ -98,4 +98,7 @@ router.post('/apply-coupon',userController.applycoupon)
 // LOGOUT
 router.get('/logout', userController.logout)
 
+
+
+
 module.exports = router;
