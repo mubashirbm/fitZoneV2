@@ -94,7 +94,7 @@ router.get('/edit-banner/:id',adminController.editBanner)
 router.post('/edit-banner',adminController.postEditBanner)
 
 // REPORT
-router.get('/report',adminController.salesReport)
+router.get('/admin/report',adminController.salesReport)
 
 // LOGOUT    
 router.get('/adminlogout', adminVerified, adminController.logout)
