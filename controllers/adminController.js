@@ -497,7 +497,7 @@ console.log("here");
     }
     
   },
-  viewOrderProduct: async (req, res,next) => {
+  viewAdminOrderProduct: async (req, res,next) => {
     // log(11111111111111111111111111)
     console.log(req.params.id, "req.paraaaaams")
     let products = await userhelpers.getAllOrderProducts(req.params.id)

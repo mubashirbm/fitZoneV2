@@ -359,7 +359,7 @@ module.exports = {
     }
   },
 
-  viewOrderProduct: async (req, res, next) => {
+  viewUserOrderProduct: async (req, res, next) => {
     console.log(req.params.id, "req.paraaaaams")
     let products = await userhelpers.getAllOrderProducts(req.params.id)
 

@@ -77,7 +77,7 @@ router.get('/category-product/:category', adminVerified, adminController.categor
 
 // ORDER MANAGEMENT
 router.get('/view-order',adminVerified,adminController.viewOrder)
-router.get('/ViewOrderdProducts/:id',adminController.viewOrderProduct)
+router.get('/ViewOrderdProducts/:id',adminController.viewAdminOrderProduct)
 router.get('/cancelOrder/:id',adminController.cancelOrder)
 router.get('/changeStatus/:id/:status',adminController.changeStatus)
 

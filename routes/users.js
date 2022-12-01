@@ -63,7 +63,7 @@ router.post('/checkout/:total', userController.postCheckout)
 router.post('/verify-payment',userController.verifyPayment)
 router.get('/conformation',userVerified, userController.confirm)
 router.get('/viewOrders',userVerified, userController.viewOrder)
-router.get('/viewOrderProducts/:id',userVerified, userController.viewOrderProduct)
+router.get('/viewUserOrderProducts/:id',userVerified, userController.viewUserOrderProduct)
 router.get('/sample',userController.sample)
 router.get('/cancelOrder/:id',userVerified,userController.cancelOrder)
 
