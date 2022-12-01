@@ -110,7 +110,7 @@ module.exports = {
     prodoductDetails: (prodId) => {
         return new Promise(async (resolve, reject) => {
             try {
-                db.get().collection(collections.PRODUCT_COLECTIONS).findOne({ _id: objectId(prodId) }).then((response) => {
+               await db.get().collection(collections.PRODUCT_COLECTIONS).findOne({ _id: objectId(prodId) }).then((response) => {
                     resolve(response)
                 })
             } catch (error) {

@@ -100,5 +100,18 @@ router.get('/report',adminController.salesReport)
 router.get('/adminlogout', adminVerified, adminController.logout)
 
 
+/* For Admin Error Page */
+router.use(function (req, res, next) {
+  next(createError(404));
+});
+
+router.use(function (err, req, res, next) {
+  console.log("admin error route handler")
+  res.status(err.status || 500);
+  res.render('admin/admin-error',{layout:'adminLog'});
+});
+
+
+
 
 module.exports = router;
