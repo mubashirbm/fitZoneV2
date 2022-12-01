@@ -124,7 +124,7 @@ module.exports = {
   login: (req, res, next) => {
     try {
       console.log("4");
-      if (req.session.loggedIn) {
+      if (req.session.userloggedIn) {
         console.log("44");
         res.redirect('/')
       } else {
@@ -145,7 +145,7 @@ module.exports = {
       userhelpers.doLogin(req.body).then((response) => {
         // console.log(console)
         if (response.status) {
-          req.session.loggedIn = true
+          req.session.userloggedIn = true
           req.session.user = response.user
           console.log("5");
           res.redirect('/')
