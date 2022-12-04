@@ -42,7 +42,7 @@
                         <tr>
                             <td class="center">{{inc @index}}</td>
                             <td class="left strong">{{this.product.name}}</td>
-                            <td class="left">₹{{this.product.price}}</td>
+                            <td class="left">₹{{this.price}}</td>
                             {{!-- <td class="right">%</td>
                             <td class="center">₹</td> --}}
                             <td class="right">{{this.quantity}}</td>
@@ -59,10 +59,10 @@
                     <table class="table table-clear">
                         <tbody>
                             <tr>
-                                <td class="left">
+                                {{!-- <td class="left">
                                     <strong class="text-dark">Subtotal</strong>
                                 </td>
-                                <td class="right">₹{{order.total}}</td>
+                                <td class="right">₹{{order.total}}</td> --}}
                             </tr>
                             {{!-- <tr>
                                 <td class="left">
@@ -71,10 +71,10 @@
                                 <td class="right">₹</td>
                             </tr> --}}
                             <tr>
-                                <td class="left">
+                                {{!-- <td class="left">
                                     <strong class="text-dark">Coupon</strong>
                                 </td>
-                                <td class="right">₹{{order.discount}}</td>
+                                <td class="right">₹{{order.discount}}</td> --}}
                             </tr>
                             {{!-- <tr>
                                 <td class="left">
